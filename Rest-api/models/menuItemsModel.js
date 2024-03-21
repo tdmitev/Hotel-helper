@@ -4,7 +4,7 @@ const menuSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minlength: [5, 'Name should be at least 5 characters'],
+        minlength: [2, 'Name should be at least 2 characters'],
     },
     image: {
         type: String,

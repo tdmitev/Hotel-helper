@@ -7,3 +7,10 @@
   router-outlet {
     flex-grow: 1;
   }
+
+  .main-content {
+    background-image: url('../assets/images/hotel.png');
+    background-size: cover;
+    background-position: center; 
+    min-height: 100vh;
+  }

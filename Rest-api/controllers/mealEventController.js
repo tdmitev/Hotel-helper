@@ -25,15 +25,43 @@ async function createMealEvent(req, res, next) {
 }
 
 function addMenuItemToMealEvent(req, res, next) {
-    const { mealEventId, menuItemId } = req.params;
+    const mealEventId = req.params.mealEventId;
+    const { menuItemId } = req.body;
 
     mealEventModel.findByIdAndUpdate(
         mealEventId,
         { $addToSet: { menuItems: menuItemId } }, 
-        { new: true }
-    ).populate('menuItems') 
-    .then(updatedEvent => res.status(200).json(updatedEvent))
+        { new: true, runValidators: true }
+    ).populate('menuItems')
+    .then(updatedEvent => {
+        if (!updatedEvent) {
+            return res.status(404).send({ message: "Meal event not found." });
+        }
+        res.status(200).json(updatedEvent);
+    })
     .catch(next);
+}
+
+function removeMenuItemFromMealEvent(req, res, next) {
+    const { mealEventId } = req.params;
+    const { menuItemId } = req.body; 
+    
+    mealEventModel.findByIdAndUpdate(
+        mealEventId,
+        { $pull: { menuItems: menuItemId } },
+        { new: true, runValidators: true }
+    )
+    .populate('menuItems') 
+    .then(updatedEvent => {
+        if (!updatedEvent) {
+            return res.status(404).send({ message: "Meal event not found." });
+        }
+        res.status(200).json(updatedEvent);
+    })
+    .catch(error => {
+        console.error("Failed to remove menuItem from mealEvent:", error);
+        next(error);
+    });
 }
 
 async function getSelectedMenuItemsForMealEvent(req, res, next) {
@@ -59,5 +87,6 @@ async function getSelectedMenuItemsForMealEvent(req, res, next) {
 module.exports = {
     createMealEvent,
     addMenuItemToMealEvent,
+    removeMenuItemFromMealEvent,
     getSelectedMenuItemsForMealEvent
 };
