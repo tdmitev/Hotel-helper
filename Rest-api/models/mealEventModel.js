@@ -19,7 +19,7 @@ const mealEventSchema = new mongoose.Schema({
     }],
     menuItems: [{
       type: ObjectId,
-      ref: 'MenuItems'
+      ref: 'MenuItem'
     }],
     totalGuests: {
       type: Number,

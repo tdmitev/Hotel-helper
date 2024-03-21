@@ -36,7 +36,28 @@ function addMenuItemToMealEvent(req, res, next) {
     .catch(next);
 }
 
+async function getSelectedMenuItemsForMealEvent(req, res, next) {
+    const { mealEventId } = req.params;
+
+    try {
+        const mealEvent = await mealEventModel.findById(mealEventId).populate('menuItems');
+        
+        if (!mealEvent) {
+            return res.status(404).send({ message: "Meal event not found." });
+        }
+
+        const selectedMenuItems = mealEvent.menuItems;
+
+        res.status(200).json(selectedMenuItems);
+    } catch (error) {
+        console.error("Failed to get menu items for meal event:", error);
+        next(error);
+    }
+}
+
+
 module.exports = {
     createMealEvent,
     addMenuItemToMealEvent,
+    getSelectedMenuItemsForMealEvent
 };

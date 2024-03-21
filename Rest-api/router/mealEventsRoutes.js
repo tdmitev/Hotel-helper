@@ -4,6 +4,6 @@ const { mealEventController } = require('../controllers');
 const { auth } = require('../utils');
 
 router.post('/create-meal-event', auth(), mealEventController.createMealEvent);
-// Допълнителни маршрути за управление на събития за хранене могат да бъдат добавени тук
+router.get('/:mealEventId/menu-items', mealEventController.getSelectedMenuItemsForMealEvent);
 
 module.exports = router;
