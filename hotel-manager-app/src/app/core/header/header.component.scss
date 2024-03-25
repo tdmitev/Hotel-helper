@@ -14,7 +14,8 @@
 
 body {
   display: flex;
-  justify-content: center;
+  flex-direction: column; // Change to column to stack menu and images
+  justify-content: flex-start; // Align content to the top
   align-items: center;
   min-height: 100vh;
   margin: 0;
@@ -137,7 +138,7 @@ p {
 }
 
 .menu {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -150,10 +151,8 @@ p {
   overflow-x: hidden;
   visibility: hidden;
   transition: 0.3s;
+  z-index: 10;
 
-  @include sp-layout {
-    display: block;
-  }
 
   &-nav {
     display: flex;
@@ -228,7 +227,8 @@ p {
     margin-top: 36px;
     display: flex;
     flex-wrap: wrap;
-    
+    max-height: 70vh;
+     overflow: auto; 
 
     @include sp-layout {
       justify-content: center;
