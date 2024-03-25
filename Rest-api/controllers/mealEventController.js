@@ -24,6 +24,15 @@ async function createMealEvent(req, res, next) {
     }
 }
 
+async function getAllMealEvents (req, res, next) {
+    try {
+        const mealEvents = await mealEventModel.find({});
+        res.json(mealEvents);
+    } catch (error) {
+        next(error);
+    }
+};
+
 function addMenuItemToMealEvent(req, res, next) {
     const mealEventId = req.params.mealEventId;
     const { menuItemId } = req.body;
@@ -88,5 +97,6 @@ module.exports = {
     createMealEvent,
     addMenuItemToMealEvent,
     removeMenuItemFromMealEvent,
-    getSelectedMenuItemsForMealEvent
+    getSelectedMenuItemsForMealEvent,
+    getAllMealEvents
 };

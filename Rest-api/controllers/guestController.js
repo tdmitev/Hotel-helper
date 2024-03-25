@@ -37,27 +37,27 @@ function importGuestsInDB(req, res) {
 }
 
 async function checkInGuest (req, res, next) {
-    const { guestId } = req.body; // Приемаме само guestId от тялото на заявката
+    const { guestId, mealEventId } = req.body; 
   
     try {
-      const lastMealEvent = await mealEventModel.findOne().sort({ created_at: -1 });
+      const mealEvent = await mealEventModel.findById(mealEventId);
   
-      if (!lastMealEvent) {
+      if (!mealEvent) {
         return res.status(404).send({ message: "Meal event not found." });
       }
-      if (!Array.isArray(lastMealEvent.guests)) {
-        lastMealEvent.guests = []; // Ако не е, инициализирайте го като празен масив
+      if (!Array.isArray(mealEvent.guests)) {
+        mealEvent.guests = []; 
       }
   
-      const guestIndex = lastMealEvent.guests.findIndex(g => g.guestId.equals(guestId));
+      const guestIndex = mealEvent.guests.findIndex(g => g.guestId.equals(guestId));
   
       if (guestIndex !== -1) {
         return res.status(400).send({ message: "Guest already checked in." });
       }
-      lastMealEvent.guests.push({ guestId, attended: true });
-      lastMealEvent.attendedGuests = (lastMealEvent.attendedGuests || 0) + 1;
+      mealEvent.guests.push({ guestId, attended: true });
+      mealEvent.attendedGuests = (mealEvent.attendedGuests || 0) + 1;
   
-      await lastMealEvent.save();
+      await mealEvent.save();
   
       res.status(200).send({ message: "Guest checked in successfully." });
     } catch (error) {
@@ -120,8 +120,6 @@ async function guestStatistics(req, res, next) {
         }
 
         console.log(mealEvent);
-
-        // Използвайте стойностите от зареденото събитие за хранене
         const statistics = {
             totalGuests: mealEvent.totalGuests,
             attendedGuests: mealEvent.attendedGuests,
@@ -135,7 +133,7 @@ async function guestStatistics(req, res, next) {
 }
 
 async function findGuestByName(req, res, next) {
-  const name = req.query.name; // Вземете името от query параметъра
+  const name = req.query.name; 
   try {
       const guests = await guestsModel.find({ name: { $regex: name, $options: 'i' } }); // Търсене на гости по име (регистър-независимо)
       if (guests.length === 0) {
@@ -150,10 +148,8 @@ async function findGuestByName(req, res, next) {
 
 async function handleGuestStatistics(req, res, next) {
   if (req.query.name) {
-      // Логика за намиране на гост по име
       findGuestByName(req, res, next);
   } else {
-      // Логика за взимане на всички проверени (checked-in) гости
       getAllCheckedInGuests(req, res, next);
   }
 }
