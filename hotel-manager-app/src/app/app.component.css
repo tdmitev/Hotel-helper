@@ -12,5 +12,6 @@
     background-image: url('../assets/images/hotel.png');
     background-size: cover;
     background-position: center; 
-    min-height: 100vh;
+    background-attachment: fixed;
+    min-height: calc(100vh - 100px); 
   }

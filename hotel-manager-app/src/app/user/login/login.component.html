@@ -1,1 +1,23 @@
-<p>login works!</p>
+  <section id="login">
+    <div class="form">
+    <div class="title-log">Login</div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+      <div class="input-container ic1">
+        <input placeholder="" type="email" class="input" formControlName="email">
+        <div class="cut"></div>
+        <label class="iLabel" for="email">Email</label>
+      </div>
+    
+      <div class="input-container ic2">
+        <input placeholder="" type="password" class="input" formControlName="password">
+        <div class="cut cut-long"></div>
+        <label class="iLabel" for="password">Password</label>
+      </div>
+    
+          <button class="login-btn" type="text">Login</button>
+        <p class="message">
+          Welcome to our team!
+        </p>
+      </form>
+    </div>
+    </section>

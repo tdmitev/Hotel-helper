@@ -1,0 +1,165 @@
+#login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 98vh;
+  }
+
+  .title-log {
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  .title {
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+  
+  .subtitle {
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .form p {
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 30px;
+  }
+
+.form {
+    transform: translateY(-20px);
+    background-color: rgba(21, 23, 43, 0.9);
+    border-radius: 20px;
+    box-sizing: border-box;
+    height: 460px;
+    padding: 20px;
+    width: 320px;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  #login .form {
+    height: 390px; 
+  }
+
+  .form.visible {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+
+  .input-container {
+    height: 50px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .ic1 {
+    margin-top: 35px;
+  }
+  
+  .ic2 {
+    margin-top: 30px;
+  }
+  
+  .input {
+    background-color: #242531;
+    border-radius: 12px;
+    border-color: #06b;
+    box-sizing: border-box;
+    color: #eee;
+    font-size: 18px;
+    height: 100%;
+    outline: 0;
+    padding: 4px 20px 0;
+    width: 100%;
+  }
+  
+  .cut {
+    border-radius: 10px;
+    height: 20px;
+    left: 20px;
+    position: absolute;
+    top: -20px;
+    transform: translateY(0);
+    transition: transform 200ms;
+    width: 52px;
+  }
+  
+  .cut-long {
+    width: 74px;
+  }
+
+  .cut-short {
+    width: 92px;
+  }
+  
+  .iLabel {
+    color: #65657b;
+    font-family: sans-serif;
+    left: 20px;
+    line-height: 14px;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    top: 20px;
+  }
+  
+  .input:not(:placeholder-shown) ~ .iLabel,
+  .input:focus ~ .iLabel {
+    transform: translateY(-30px) translateX(10px) scale(0.75);
+  }
+  
+  .input:not(:placeholder-shown) ~ .cut,
+  .input:focus ~ .cut {
+    background-color:rgba(21, 23, 43, 0.6);
+    transform: translateY(8px);
+  }
+  
+  .input:not(:focus) ~ .iLabel {
+    color: #808097;
+  }
+  
+  .input:focus ~ .iLabel {
+    color: #ffffff;
+  }
+
+  .login-btn {
+    background-color: #08d;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: flex-start;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    cursor: pointer;
+    font-size: 18px;
+    height: 50px;
+    margin-top: 28px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .login-btn:hover {
+    background-color: rgba(84, 178, 255, 0.78);
+  }
