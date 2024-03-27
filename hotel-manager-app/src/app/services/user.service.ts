@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class UserService {
-  user: User | null = null;
+  user: User | undefined;
   USER_KEY = '[user]';
   private apiUrl = 'http://localhost:3001/api';
 
@@ -31,7 +31,7 @@ export class UserService {
 
   login(email: string, password: string): Observable<User> {
     return new Observable((observer) => {
-      this.http.post<User>(`${this.apiUrl}/login`, { email, password }).subscribe({
+      this.http.post<User>(`${this.apiUrl}/login`, { email, password }, { withCredentials: true }).subscribe({
         next: (user) => {
           this.user = user;
           localStorage.setItem(this.USER_KEY, JSON.stringify(user));
@@ -45,19 +45,16 @@ export class UserService {
     });
   }
 
-  logout(): Observable<void> {
-    return new Observable((observer) => {
-      this.http.post(`${this.apiUrl}/logout`, { withCredentials: true }).subscribe({
-        next: () => {
-          this.user = null;
-          localStorage.removeItem(this.USER_KEY);
-          observer.next();
-          observer.complete();
-        },
-        error: (err) => {
-          observer.error(err);
-        },
-      });
+  logout(): void {
+    this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).subscribe({
+      next: () => {
+        this.user = undefined;
+        localStorage.removeItem(this.USER_KEY);
+        console.log("Logout successful");
+      },
+      error: (err) => {
+        console.error("Logout failed:", err);
+      }
     });
   }
 

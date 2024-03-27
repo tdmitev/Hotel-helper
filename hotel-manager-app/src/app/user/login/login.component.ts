@@ -24,7 +24,7 @@ export class LoginComponent {
       this.userService.login(email, password).subscribe({
         next: (user) => {
           console.log("Login successful!", user);
-          this.router.navigate(['/']); 
+          this.router.navigate(['/']);
         },
         error: (error) => {
           console.error("Login failed:", error);

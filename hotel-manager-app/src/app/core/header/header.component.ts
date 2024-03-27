@@ -24,15 +24,8 @@ export class HeaderComponent implements OnInit{
   }
 
   logout(): void {
-    this.userService.logout().subscribe({
-      next: () => {
-        console.log('Logged out successfully');
-        this.router.navigate(['/']); // Пренасочване след успешно излизане
-      },
-      error: (err) => {
-        console.error('Logout failed:', err);
-      }
-    });
+    this.userService.logout();
+    this.router.navigate(['/']);
   }
 
   ngOnInit(): void {
