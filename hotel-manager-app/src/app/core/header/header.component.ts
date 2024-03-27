@@ -4,6 +4,7 @@ import { MealItemService } from 'src/app/services/meal-item.service';
 import { Inject } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',

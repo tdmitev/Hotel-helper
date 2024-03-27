@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../types/user';
 import { Observable, catchError, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class UserService {
     return !!this.user;
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private errorService: ErrorService) {
     this.user = JSON.parse(localStorage.getItem(this.USER_KEY) || 'null');
   }
 

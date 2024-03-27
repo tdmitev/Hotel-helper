@@ -1,0 +1,12 @@
+/* home.component.scss */
+.main-content {
+    background-image: url('/assets/images/hotel.png');
+    background-size: cover;
+    background-position: center; 
+    background-attachment: fixed;
+    min-height: calc(100vh - 100px); 
+    position: relative;
+    transition: opacity 1s ease; 
+    z-index: 1;
+  }
+  
