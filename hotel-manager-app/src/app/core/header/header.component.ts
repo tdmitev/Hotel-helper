@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
-
+  formSubmitted = false;
   dropdownState = 'closed';
   rotateState = 'default';
 

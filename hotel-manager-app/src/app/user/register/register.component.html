@@ -1,44 +1,54 @@
-<section id="register">
+<section id="register" [@slideFade] [formGroup]="registerForm">
     <div class="form">
           <div class="title">Welcome</div>
           <div class="subtitle">Let's create your account!</div>
           <form  class="register-form">
     
           <div class="input-container ic1">
-            <input placeholder="" type="text" class="input" name="email" id="email">
-    
+            <input placeholder="" type="text" class="input" formControlName="email">
+            <div *ngIf="formSubmitted && registerForm.get('email')?.errors?.['required']" class="error-message">Email is required.</div>
+            <div *ngIf="formSubmitted && registerForm.get('email')?.errors?.['email']" class="error-message">Invalid email format.</div>
             <div class="cut"></div>
             <label class="iLabel" for="email">Email</label>
           </div>
 
           <div class="input-container ic2">
-            <input placeholder="" type="text" class="input" name="username" id="username">
-    
+            <input placeholder="" type="text" class="input" formControlName="username">
+            <div *ngIf="formSubmitted && registerForm.get('username')?.errors?.['required']" class="error-message" >Username is required.</div>
+            <div *ngIf="formSubmitted && registerForm.get('username')?.errors?.['email']" class="error-message" >Invalid username format.</div>
             <div class="cut cut-long"></div>
             <label class="iLabel" for="username">Username</label>
           </div>
-
+          
           <div class="input-container ic1">
-            <input placeholder="" type="text" class="input" name="role" id="role">
-    
+            <input placeholder="" type="text" class="input" formControlName="role">
+            <div *ngIf="formSubmitted && registerForm.get('role')?.errors?.['required']" class="error-message" >Role is required.</div>
+            <div *ngIf="formSubmitted && registerForm.get('role')?.errors?.['role']" class="error-message" >Invalid role format.</div>
             <div class="cut"></div>
             <label class="iLabel" for="role">Role</label>
           </div>
     
           <div class="input-container ic2">
-            <input placeholder="" type="text" class="input" name="password" id="password">
-    
+            <input placeholder="" type="password" class="input" formControlName="password">
+            <div *ngIf="formSubmitted && registerForm.get('password')?.errors?.['required']" class="error-message">Password is required.</div>
+            <div *ngIf="formSubmitted && registerForm.get('password')?.errors?.['minlength']" class="error-message">Password must be at least 6 characters.</div>
             <div class="cut cut-long"></div>
             <label class="iLabel" for="Password">Password</label>
           </div>
     
           <div class="input-container ic2">
-            <input placeholder="" type="text" class="input" name="repeatPassword" id="re-password">
-    
+            <input placeholder="" type="text" class="input" formControlName="repeatPassword">
+  <div *ngIf="formSubmitted && registerForm.get('repeatPassword')?.errors?.['required']" class="error-message">Repeating the password is required.</div>
+  <div *ngIf="formSubmitted && registerForm.value.password !== registerForm.value.repeatPassword" class="error-message">Passwords must match.</div>
             <div class="cut cut-short"></div>
-            <label class="iLabel" for="re-password">Re-password</label>
+            <label class="iLabel" for="repeatPassword">Re-password</label>
           </div>
-          <button class="register-btn" type="text">Register</button>
+          <button class="register-btn" type="button" (click)="register()">Register</button>
           </form>
         </div>
+
+        
+        
     </section>
+
+    

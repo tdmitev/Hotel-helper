@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../types/user';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +19,26 @@ export class UserService {
     this.user = JSON.parse(localStorage.getItem(this.USER_KEY) || 'null');
   }
 
-  register(email: string, username: string, password: string, repeatPassword: string, role: string): Observable<User> {
+  register(email: string, username: string, role: string, password: string, repeatPassword: string): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/register`, { 
       email, 
       username, 
+      role, 
       password, 
-      repeatPassword, 
-      role 
-    });
+      repeatPassword
+    }, { withCredentials: true }) 
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          let errorMsg = 'An error occurred';
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = `Error Status: ${error.status}\nMessage: ${error.message}`;
+          }
+          console.error(errorMsg);
+          return throwError(() => new Error(errorMsg));
+        })
+      );
   }
 
   login(email: string, password: string): Observable<User> {

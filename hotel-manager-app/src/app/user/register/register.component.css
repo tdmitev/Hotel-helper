@@ -150,4 +150,6 @@
     background-color: rgba(84, 178, 255, 0.78);
   }
 
-  
+  .error-message {
+    color: white;
+  }

@@ -13,16 +13,14 @@ export const fadeOut = trigger('fadeOut', [
   ]),
 ]);
 
-export const slideIn = trigger('slideIn', [
+export const slideFade = trigger('slideFade', [
   transition(':enter', [
-    style({ transform: 'translateY(-100%)' }),
-    animate('0.5s', style({ transform: 'translateY(0)' })),
+    style({ transform: 'translateY(-3%)', opacity: 0 }),
+    animate('0.4s ease-in', style({ transform: 'translateY(0)', opacity: 1 })),
   ]),
-]);
-
-export const slideOut = trigger('slideOut', [
   transition(':leave', [
-    animate('0.5s', style({ transform: 'translateY(-100%)' }))
+    style({ opacity: 1 }),
+    animate('0.4s ease-out', style({ transform: 'translateY(-3%)', opacity: 0 })),
   ]),
 ]);
 
