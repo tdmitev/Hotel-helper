@@ -3,12 +3,12 @@ function errorHandler(err, req, res, next) {
         res.status(333)
             .json({ message: 'ErrorHandler: not allowed!' })
     } else {
-        console.error(err.stack); // Това ще отпечата стека на извикване в конзолата
+        console.error(err.stack); 
         res.status(500)
             .json({ 
                 message: 'ErrorHandler: Something went wrong!',
-                error: err.message, // Показва съобщението на грешката
-                stack: err.stack // Можете да изпратите стека на клиента, но обикновено това не е препоръчително в продукционна среда
+                error: err.message, 
+                stack: err.stack 
             });
     }
 }

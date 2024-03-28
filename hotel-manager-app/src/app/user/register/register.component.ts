@@ -1,9 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { slideFade } from 'src/app/animations/animations';
-import { ErrorService } from 'src/app/services/error.service';
 import { UserService } from 'src/app/services/user.service'; 
 
 @Component({
@@ -15,9 +13,8 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   formSubmitted = false;
-  backendErrorMessage: string = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private errorService: ErrorService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required, Validators.minLength(4)]],
@@ -28,9 +25,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.errorService.error$.subscribe((error) => {
-      this.backendErrorMessage = error.message;
-    });
+
   }
 
   register(): void {
@@ -42,19 +37,12 @@ export class RegisterComponent implements OnInit {
           console.log("Registration successful", user);
           this.router.navigate(['/']);
         },
-        error: (error) => {
-          let errorMessage = "Registration failed due to an unknown error.";
-          if (error instanceof HttpErrorResponse) {
-            errorMessage = error.error.message || "An error occurred during registration.";
-          }
-          this.errorService.handleError({errorCode: error.status, message: errorMessage, details: ''});
-          console.error(errorMessage);
+        error: (errorMessage) => {
+          console.error("Registration failed:", errorMessage);
         }
       });
     } else {
-      let formErrorMessage = "Form is not valid or passwords do not match.";
-      this.errorService.handleError({errorCode: -1, message: formErrorMessage, details: 'Please check your input and try again.'});
-      console.error(formErrorMessage);
+      console.error("Form is not valid or passwords do not match.");
     }
   }
 }

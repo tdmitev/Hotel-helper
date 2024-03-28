@@ -1,23 +1,26 @@
-  <section id="login" [@slideFade]>
-    <div class="form">
+<div *ngIf="loginError" class="error-message">{{ loginError }}</div>
+<section id="login" [@slideFade]>
+  <div class="form">
     <div class="title-log">Login</div>
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
       <div class="input-container ic1">
         <input placeholder="" type="email" class="input" formControlName="email">
+        <div *ngIf=" formSubmitted && loginForm.get('email')?.errors?.['required']" class="error-message">Email is required.</div>
+        <div *ngIf="formSubmitted && loginForm.get('email')?.errors?.['email']" class="error-message">Invalid email format.</div>
         <div class="cut"></div>
         <label class="iLabel" for="email">Email</label>
       </div>
     
       <div class="input-container ic2">
         <input placeholder="" type="password" class="input" formControlName="password">
+        <div *ngIf="formSubmitted && loginForm.get('password')?.errors?.['required']" class="error-message">Password is required.</div>
+        <div *ngIf="formSubmitted && loginForm.get('password')?.errors?.['minlength']" class="error-message">Password must be at least 6 characters.</div>
         <div class="cut cut-long"></div>
         <label class="iLabel" for="password">Password</label>
       </div>
     
-          <button class="login-btn" type="text">Login</button>
-        <p class="message">
-          Welcome to our team!
-        </p>
-      </form>
-    </div>
-    </section>
+      <button class="login-btn" type="submit">Login</button>
+      <p class="message">Welcome to our team!</p>
+    </form>
+  </div>
+</section>

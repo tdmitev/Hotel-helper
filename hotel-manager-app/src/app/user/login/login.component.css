@@ -163,3 +163,29 @@
   .login-btn:hover {
     background-color: rgba(84, 178, 255, 0.78);
   }
+
+  .error-message {
+    color: #ff3860; 
+    background-color: #ffe5e7;
+    border-left: 5px solid #ff3860;
+    padding: 3px; 
+    max-width: 400px; 
+  margin-left: auto; 
+  margin-right: auto;
+  font-size: 0.9rem; 
+    margin-bottom: 20px; 
+    border-radius: 4px; 
+    display: block; 
+  }
+  
+
+  input.ng-invalid.ng-touched,
+  input.ng-dirty.ng-invalid {
+    border-color: #ff3860; 
+  }
+  
+  input.ng-invalid.ng-touched:focus,
+  input.ng-dirty.ng-invalid:focus {
+    outline: none; 
+    box-shadow: 0 0 0 0.2rem rgba(255, 56, 96, 0.25);
+  }

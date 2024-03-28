@@ -1,4 +1,5 @@
 <div class="background-container" [class.faded-background]="isFaded"></div>
+<div *ngIf="message" class="welcome-message">{{ message }}</div>
 
 <div class="main-content">
   <app-header></app-header>

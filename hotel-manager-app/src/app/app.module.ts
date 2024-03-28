@@ -8,8 +8,6 @@ import { UserRoutingModule } from './user/user-routing.module';
 import { UserModule } from './user/user.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-import { ErrorComponent } from './error/error.component';
-import { GlobalErrorHandlerService } from './services/error-handler.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +26,6 @@ import { GlobalErrorHandlerService } from './services/error-handler.service';
   providers: [
     {
       provide: ErrorHandler,
-      useClass: GlobalErrorHandlerService
     }
   ],
   bootstrap: [AppComponent]

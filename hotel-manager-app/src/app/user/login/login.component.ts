@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { slideFade } from 'src/app/animations/animations';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,10 @@ import { slideFade } from 'src/app/animations/animations';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  formSubmitted = false;
+  loginError: string = '';
 
-  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder, private messageService: MessageService) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -21,14 +24,16 @@ export class LoginComponent {
   }
 
   login() {
+    this.formSubmitted = true;
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.userService.login(email, password).subscribe({
-        next: (user) => {
-          console.log("Login successful!", user);
+        next: (response) => {
+          this.messageService.setMessage(`Welcome, ${response.role + " " + response.username}!`);
           this.router.navigate(['/']);
         },
         error: (error) => {
+          this.loginError = 'Invalid email or password'; 
           console.error("Login failed:", error);
         }
       });
