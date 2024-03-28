@@ -30,6 +30,7 @@ export class LoginComponent {
       this.userService.login(email, password).subscribe({
         next: (response) => {
           this.messageService.setMessage(`Welcome, ${response.role + " " + response.username}!`);
+          console.log(localStorage.getItem('authToken'));
           this.router.navigate(['/']);
         },
         error: (error) => {

@@ -18,7 +18,7 @@ export class MealEventService {
   }
 
   selectMealEvent(mealEventId: string): Observable<MealEvent> {
-    return this.http.post<MealEvent>(`${this.apiUrl}/select`, { mealEventId });
+    return this.http.post<MealEvent>(`${this.apiUrl}/select/${mealEventId}`, { withCredentials: true });
   }
 
   deselectMealEvent(): Observable<any> { 

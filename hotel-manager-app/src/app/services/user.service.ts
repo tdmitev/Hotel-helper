@@ -58,7 +58,7 @@ export class UserService {
   }
 
   logout(): void {
-    this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).subscribe({
+    this.http.post(`${this.apiUrl}/logout`, { withCredentials: true }).subscribe({
       next: () => {
         this.user = undefined;
         localStorage.removeItem(this.USER_KEY);

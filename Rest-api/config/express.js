@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const cookieSecret = process.env.COOKIESECRET || 'TdMitev';
 const { errorHandler } = require('../utils')
 const session = require('express-session');
+const cors = require('cors');
 
 module.exports = (app) => {
     app.use(express.json());
@@ -17,6 +18,11 @@ module.exports = (app) => {
         cookie: {
             maxAge: 3600000
         }
+      }));
+
+      app.use(cors({
+        origin: 'http://localhost:4200', 
+        credentials: true 
       }));
   
 
