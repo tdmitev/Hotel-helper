@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { slideFade } from 'src/app/animations/animations';
 import { MessageService } from 'src/app/services/message.service';
 import { UserService } from 'src/app/services/user.service'; 
+import { emailValidator } from 'src/app/utils/email-validator';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private messageService: MessageService) {
     this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, emailValidator()]],
       username: ['', [Validators.required, Validators.minLength(4)]],
       role: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
