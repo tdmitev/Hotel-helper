@@ -4,10 +4,8 @@ async function createMealEvent(req, res, next) {
     const { date, mealType, menuItems } = req.body;
 
     try {
-        // Изчисляване на общия брой гости в базата данни
         const totalGuestsCount = await guestsModel.countDocuments();
 
-        // Създаване на ново събитие за хранене с автоматично попълнено поле totalGuests
         const createdEvent = await mealEventModel.create({
             date,
             mealType,
@@ -24,6 +22,41 @@ async function createMealEvent(req, res, next) {
     }
 }
 
+async function getMealEventById(mealEventId) {
+    try {
+        const mealEvent = await mealEventModel.findById(mealEventId);
+        return mealEvent;
+    } catch (error) {
+        console.error("Error fetching meal event by ID:", error);
+        throw error; 
+    }
+}
+
+async function selectMealEvent (req, res, next) {
+    const { mealEventId } = req.params;
+    try {
+        const mealEvent = await getMealEventById(mealEventId);
+        if (!mealEvent) {
+            return res.status(404).json({ message: "Meal event not found." });
+        }
+        req.session.selectedMealEventId = mealEventId; 
+        res.json({ message: "Meal event selected successfully." });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error selecting meal event." });
+    }
+};
+
+async function deselectMealEvent(req, res, next) {
+    if (!req.session.selectedMealEventId) {
+        return res.status(400).json({ message: "No meal event is currently selected." });
+    }
+
+    delete req.session.selectedMealEventId;
+
+    res.json({ message: "Meal event deselected successfully." });
+}
+
 async function getAllMealEvents (req, res, next) {
     try {
         const mealEvents = await mealEventModel.find({});
@@ -34,8 +67,13 @@ async function getAllMealEvents (req, res, next) {
 };
 
 function addMenuItemToMealEvent(req, res, next) {
-    const mealEventId = req.params.mealEventId;
+
+    const mealEventId = req.session.selectedMealEventId;
     const { menuItemId } = req.body;
+
+    if (!mealEventId) {
+        return res.status(400).send({ message: "No meal event selected." });
+    }
 
     mealEventModel.findByIdAndUpdate(
         mealEventId,
@@ -52,7 +90,7 @@ function addMenuItemToMealEvent(req, res, next) {
 }
 
 function removeMenuItemFromMealEvent(req, res, next) {
-    const { mealEventId } = req.params;
+    const mealEventId = req.session.selectedMealEventId;
     const { menuItemId } = req.body; 
     
     mealEventModel.findByIdAndUpdate(
@@ -74,7 +112,7 @@ function removeMenuItemFromMealEvent(req, res, next) {
 }
 
 async function getSelectedMenuItemsForMealEvent(req, res, next) {
-    const { mealEventId } = req.params;
+    const mealEventId = req.session.selectedMealEventId;
 
     try {
         const mealEvent = await mealEventModel.findById(mealEventId).populate('menuItems');
@@ -98,5 +136,7 @@ module.exports = {
     addMenuItemToMealEvent,
     removeMenuItemFromMealEvent,
     getSelectedMenuItemsForMealEvent,
-    getAllMealEvents
+    getAllMealEvents,
+    selectMealEvent,
+    deselectMealEvent
 };

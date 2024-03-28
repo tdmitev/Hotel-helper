@@ -14,7 +14,9 @@ module.exports = (app) => {
         secret: 'odkf0sd9u_90asi09w3w9%$#wiudYG&6w%$#fty', 
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false } 
+        cookie: {
+            maxAge: 3600000
+        }
       }));
   
 

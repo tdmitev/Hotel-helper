@@ -6,7 +6,7 @@ const { auth } = require('../utils');
 router.get('/', auth(), guestController.getAllGuests);
 router.get('/room', guestController.getGuestsByRoom);
 router.post('/import', auth(), guestController.importGuestsInDB);
-router.post('/:mealEventId/room/check-in', guestController.checkInGuest);
+router.post('/room/check-in', guestController.checkInGuest);
 router.get('/statistics', auth(), guestController.guestStatistics);
 router.get('/statistics/checked-in-guests', auth(), guestController.handleGuestStatistics);
 router.post('/statistics/checked-in-guests/:guestId', auth(), guestController.undoCheckInGuest);

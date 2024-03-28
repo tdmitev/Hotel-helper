@@ -1,5 +1,3 @@
-/* Управлява операции, свързани с гостите, като търсене на гост
- по име или номер на стая, импортване на данните на гости в JSON ил CSV */
 
  const fs = require('fs');
  const path = require('path');
@@ -24,9 +22,8 @@ async function getGuestsByRoom (req, res, next) {
   }
   }
 
-// Импортва се JSON файл с данни за гостите name, age, tel, gender, roomNumber, stayPeriod, view, occupancyStatus
 function importGuestsInDB(req, res) {
-    const guests = req.body; // Приемане на данни директно от тялото на заявката
+    const guests = req.body; 
 
     guestsModel.insertMany(guests)
         .then(() => res.status(200).send({ message: "Guests imported successfully." }))
@@ -37,7 +34,8 @@ function importGuestsInDB(req, res) {
 }
 
 async function checkInGuest (req, res, next) {
-    const { guestId, mealEventId } = req.body; 
+    const mealEventId = req.session.selectedMealEventId;
+    const { guestId } = req.body; 
   
     try {
       const mealEvent = await mealEventModel.findById(mealEventId);
@@ -96,11 +94,16 @@ async function checkInGuest (req, res, next) {
 
   async function getAllCheckedInGuests(req, res, next) {
     try {
-      const lastMealEvent = await mealEventModel.findOne().sort({ created_at: -1 }).populate('guests.guestId');
-      if (!lastMealEvent) {
-        return res.status(404).send({ message: "Meal event not found." });
+      const mealEventId = req.session.selectedMealEventId;
+      if (!mealEventId) {
+        return res.status(404).send({ message: "No meal event selected." });
       }
   
+      const mealEvent = await mealEventModel.findById(mealEventId).populate('guests.guestId');
+  
+      if (!mealEvent) {
+        return res.status(404).send({ message: "Meal event not found." });
+      }
       const checkedInGuests = lastMealEvent.guests.filter(g => g.attended).map(g => g.guestId);
       res.status(200).json(checkedInGuests);
     } catch (error) {
@@ -109,15 +112,16 @@ async function checkInGuest (req, res, next) {
     }
   }
 
-async function guestStatistics(req, res, next) {
-    const { mealEventId } = req.query;
-    console.log("Searching for mealEventId:", mealEventId);
-
+  async function guestStatistics(req, res, next) {
     try {
-        const mealEvent = await mealEventModel.findOne().sort({ created_at: -1 }).populate('guests.guestId');
-        if (!mealEvent) {
-            return res.status(404).send({ message: "Meal event not found." });
-        }
+      const mealEventId = req.session.selectedMealEventId;
+      console.log("Searching for mealEventId:", mealEventId);
+
+      if (!mealEventId) {
+        return res.status(404).send({ message: "No meal event selected." });
+      }
+
+        const mealEvent = await mealEventModel.findById(mealEventId).populate('guests.guestId');
 
         console.log(mealEvent);
         const statistics = {
