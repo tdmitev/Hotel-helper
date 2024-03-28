@@ -31,10 +31,6 @@ export class HeaderComponent implements OnInit{
 
   ngOnInit(): void {
 
-    const mealEventId = '65fab6da042d6284bb31009f';
-    this.mealItemService.getDishes(mealEventId).subscribe(dishes => {
-      this.dishes = dishes;
-    });
   }
 
 }

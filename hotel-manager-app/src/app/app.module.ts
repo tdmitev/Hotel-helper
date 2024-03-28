@@ -8,11 +8,12 @@ import { UserRoutingModule } from './user/user-routing.module';
 import { UserModule } from './user/user.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
+import { MealEventsModule } from './meal-events/meal-events.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +22,8 @@ import { HomeComponent } from './home/home.component';
     UserModule,
     HttpClientModule,
     UserRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MealEventsModule
   ],
   providers: [
     {

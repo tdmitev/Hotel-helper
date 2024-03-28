@@ -1,0 +1,6 @@
+<ul>
+    <li *ngFor="let event of mealEvents">
+      {{ event.date | date }} - {{ event.mealType }}
+      <button *ngIf="event._id" (click)="selectMealEvent(event._id)">Choose</button>
+    </li>
+  </ul>
