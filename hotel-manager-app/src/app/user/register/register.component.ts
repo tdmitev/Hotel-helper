@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { slideFade } from 'src/app/animations/animations';
+import { MessageService } from 'src/app/services/message.service';
 import { UserService } from 'src/app/services/user.service'; 
 
 @Component({
@@ -13,8 +14,10 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   formSubmitted = false;
+  loginError: string = '';
+  roleOptions = ['chef', 'receptionist', 'manager'];
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService, private messageService: MessageService) {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required, Validators.minLength(4)]],
@@ -33,8 +36,8 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid && this.registerForm.value.password === this.registerForm.value.repeatPassword) {
       const { email, username, role, password, repeatPassword } = this.registerForm.value;
       this.userService.register(email, username, role, password, repeatPassword).subscribe({
-        next: (user) => {
-          console.log("Registration successful", user);
+        next: (response) => {
+          this.messageService.setMessage(`Welcome to the team, ${response.role + " " + response.username}!`);
           this.router.navigate(['/']);
         },
         error: (errorMessage) => {

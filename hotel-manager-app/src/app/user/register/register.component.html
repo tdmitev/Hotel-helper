@@ -21,10 +21,11 @@
           </div>
           
           <div class="input-container ic1">
-            <input placeholder="" type="text" class="input" formControlName="role">
-            <div *ngIf="formSubmitted && registerForm.get('role')?.errors?.['required']" class="error-message" >Role is required.</div>
-            <div *ngIf="formSubmitted && registerForm.get('role')?.errors?.['role']" class="error-message" >Invalid role format.</div>
-            <div class="cut"></div>
+            <select class="input" formControlName="role" id="role">
+              <option value="" disabled selected>Choose your role</option>
+              <option *ngFor="let role of roleOptions" [value]="role">{{ role }}</option>
+            </select>
+            <div *ngIf="formSubmitted && registerForm.get('role')?.errors?.['required']" class="error-message">Role is required.</div>
             <label class="iLabel" for="role">Role</label>
           </div>
     
@@ -46,9 +47,6 @@
           <button class="register-btn" type="button" (click)="register()">Register</button>
           </form>
         </div>
-
-        
-        
     </section>
 
     
