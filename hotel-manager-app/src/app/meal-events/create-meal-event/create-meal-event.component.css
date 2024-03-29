@@ -1,0 +1,99 @@
+.table-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 50px; /* Changed to pixels */
+    padding-bottom: 50px; /* Changed to pixels */
+  }
+  
+  .div-2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    font-family: Inter, sans-serif;
+    border-radius: 0px 0px 21px 21px;
+    border-color: #06b;
+    border-style: solid;
+    border-width: 2px;
+    background-color: #fff;
+    align-self: center;
+    justify-content: center;
+    padding: 10px 48px;
+    width: fit-content;
+    margin-bottom: auto;
+  }
+  
+  .div-2 img {
+    width: 30px; 
+    height: auto;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    gap: 10px;
+    padding-top: 35px; 
+    transition: all 0.5s ease;
+  }
+  
+  .icon img {
+    width: 75px;
+    height: auto; 
+    transition: transform 0.5s ease;
+  }
+  
+  .icon-title {
+    font-size: 1.25rem; 
+    font-weight: bold;
+    transition: font-size 0.5s ease;
+  }
+
+    .icon:hover img {
+    transform: scale(0.95); 
+  }
+  
+  .icon:hover .icon-title {
+    font-size: 1.5rem; 
+  }
+  
+  .table-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(245, 250, 255, 0.85);
+    border-radius: 28px;
+    border: 2px solid #06b;
+    box-shadow: 0 4px 8px #06b;
+    margin-top: 70px; /* Reduced margin-top and changed to pixels */
+    padding: 0px 20px 20px 20px; /* Adjusted padding and changed to pixels */
+    max-width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-content {
+    max-width: 90vw;
+    overflow-x: auto;
+  }
+  
+  .table-content table {
+    min-width: 600px;
+  }
+  
+  @media (max-width: 768px) {
+    .table-content {
+      max-width: 100%;
+    }
+    .div-2 {
+      padding: 21px 20px; 
+    }
+  }

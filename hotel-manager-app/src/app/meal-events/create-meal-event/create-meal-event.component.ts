@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { slideFade } from 'src/app/animations/animations';
 import {MealItemService} from 'src/app/services/meal-item.service';
 import { MenuItem } from 'src/app/types/menuItems';
 
 @Component({
   selector: 'app-create-meal-event',
   templateUrl: './create-meal-event.component.html',
-  styleUrls: ['./create-meal-event.component.css']
+  styleUrls: ['./create-meal-event.component.css'],
+  animations: [slideFade]
 })
 export class CreateMealEventComponent implements OnInit {
   createMealEventForm: FormGroup;

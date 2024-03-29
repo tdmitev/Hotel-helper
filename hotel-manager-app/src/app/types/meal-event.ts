@@ -7,7 +7,7 @@ export interface MealEvent {
       attended: boolean;
     }>;
     menuItems: string[]; 
-    totalGuests: number;
-    attendedGuests: number;
+    totalGuests?: number;
+    attendedGuests?: number;
     createdAt?: Date; 
   }
