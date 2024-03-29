@@ -8,4 +8,5 @@ export interface MenuItem {
     created_at: string;
     updatedAt: string;
     __v: number;
+    selected?: boolean;
   }

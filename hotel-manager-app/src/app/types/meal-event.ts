@@ -2,7 +2,7 @@ export interface MealEvent {
     _id?: string;
     date: Date;
     mealType: 'breakfast' | 'lunch' | 'dinner';
-    guests: Array<{
+    guests?: Array<{
       guestId: string; 
       attended: boolean;
     }>;
