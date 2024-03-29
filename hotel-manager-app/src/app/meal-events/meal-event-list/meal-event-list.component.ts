@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { fadeIn, slideFade } from 'src/app/animations/animations';
 import { MealEventService } from 'src/app/services/meal-event.service';
 import { MealEvent } from 'src/app/types/meal-event';
@@ -12,9 +13,8 @@ import { MealEvent } from 'src/app/types/meal-event';
 export class MealEventListComponent implements OnInit {
   mealEvents: MealEvent[] = [];
   selectedMealEventId: string | null | undefined = null;
-  router: any;
 
-  constructor(private mealEventService: MealEventService) {}
+  constructor(private mealEventService: MealEventService, private router: Router) {}
 
   ngOnInit() {
     this.loadMealEvents();
@@ -55,13 +55,18 @@ export class MealEventListComponent implements OnInit {
   }
 
   deleteMealEvent(mealEventId: string): void {
-    this.mealEventService.deleteMealEvent(mealEventId).subscribe({
-      next: (response) => {
-        console.log('Meal event deleted successfully', response);
-        this.loadMealEvents();
-      },
-      error: (error) => console.error('Неуспешно изтриване на mealEvent', error)
-    });
+    const confirmation = window.confirm('Are you sure you want to delete this meal event?');
+    
+    if (confirmation) {
+      this.mealEventService.deleteMealEvent(mealEventId).subscribe({
+        next: (response) => {
+          console.log('Meal event deleted successfully', response);
+        },
+        error: (error) => console.error('Неуспешно изтриване на mealEvent', error)
+      });
+    } else {
+      console.log('Meal event deletion cancelled by the user.');
+    }
   }
 
 }
