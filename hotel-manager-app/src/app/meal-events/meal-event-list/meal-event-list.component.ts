@@ -12,6 +12,7 @@ import { MealEvent } from 'src/app/types/meal-event';
 export class MealEventListComponent implements OnInit {
   mealEvents: MealEvent[] = [];
   selectedMealEventId: string | null | undefined = null;
+  router: any;
 
   constructor(private mealEventService: MealEventService) {}
 
@@ -23,6 +24,10 @@ export class MealEventListComponent implements OnInit {
     this.mealEventService.getAllMealEvents().subscribe(mealEvents => {
       this.mealEvents = mealEvents;
     });
+  }
+
+  navigateToCreateMealEvent() {
+    this.router.navigate(['/meal-events/create-meal-event']);
   }
 
   selectMealEvent(eventId: string | undefined): void {

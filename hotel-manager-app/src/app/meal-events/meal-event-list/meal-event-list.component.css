@@ -3,22 +3,49 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    padding-top: 4rem; /* Adjust as needed */
-    padding-bottom: 4rem; /* Space below the table */
+    padding-top: 50px; /* Changed to pixels */
+    padding-bottom: 50px; /* Changed to pixels */
   }
   
   .div-2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
     font-family: Inter, sans-serif;
     border-radius: 0px 0px 21px 21px;
-    border-color: rgba(0, 0, 0, 1);
+    border-color: #06b;
     border-style: solid;
     border-width: 2px;
     background-color: #fff;
     align-self: center;
     justify-content: center;
-    padding: 21px 48px;
-    width: fit-content; /* Adjust the width to fit the title */
-    margin-bottom: auto; /* Space below the title */
+    padding: 10px 48px;
+    width: fit-content;
+    margin-bottom: auto;
+  }
+  
+  .div-2 img {
+    width: 30px; 
+    height: auto;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    gap: 10px;
+    padding-top: 35px; 
+  }
+  
+  .icon img {
+    width: 75px;
+    height: auto; 
+  }
+  
+  .icon-title {
+    font-size: 1.25rem; 
+    font-weight: bold;
   }
   
   .table-title {
@@ -32,12 +59,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(218, 218, 218, 0.85);
+    background: rgba(245, 250, 255, 0.85);
     border-radius: 28px;
-    border: 2px solid rgba(0, 0, 0, 1);
-    margin-top: 5rem; /* Adjust this value to position the container lower on the page */
-    padding: 2rem;
-    max-width: 80%; /* Adjust width as needed */
+    border: 2px solid #06b;
+    box-shadow: 0 4px 8px #06b;
+    margin-top: 70px; /* Reduced margin-top and changed to pixels */
+    padding: 0px 20px 20px 20px; /* Adjusted padding and changed to pixels */
+    max-width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
@@ -55,6 +83,6 @@
       max-width: 100%;
     }
     .div-2 {
-      padding: 21px 20px; /* Adjust padding for smaller screens */
+      padding: 21px 20px; 
     }
   }

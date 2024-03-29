@@ -1,10 +1,15 @@
 <div @slideFade class="table-wrapper">
   <div class="table-container">
     <div class="div-2">
+      <img src="/assets/images/food.png" alt="Meal Icon">
       <div class="table-title">Created meal events</div>
     </div>
+    <div class="icon">
+      <img src="/assets/images/mealEventIcon.png" alt="Create meal event" (click)="navigateToCreateMealEvent()">
+      <div class="icon-title">Create meal event</div>
+    </div>
     <div class="table-content">
-<div class="relative overflow-x-auto overflow-y-auto shadow-md flex flex-col justify-start items-center pt-[14rem]">
+<div class="relative overflow-x-auto overflow-y-auto shadow-md flex flex-col justify-start items-center pt-8">
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-5xl mx-auto">
     <div class="overflow-y-auto h-72">
       <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
