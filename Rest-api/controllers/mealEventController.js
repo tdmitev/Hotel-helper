@@ -22,6 +22,23 @@ async function createMealEvent(req, res, next) {
     }
 }
 
+async function deleteMealEvent(req, res, next) {
+    const { mealEventId } = req.params;
+
+    try {
+        const deletedEvent = await mealEventModel.findByIdAndDelete(mealEventId);
+
+        if (!deletedEvent) {
+            return res.status(404).send({ message: "Meal event not found." });
+        }
+
+        res.status(200).json(deletedEvent);
+    } catch (error) {
+        console.error("Failed to delete meal event:", error);
+        next(error);
+    }
+}
+
 async function getMealEventById(mealEventId) {
     try {
         const mealEvent = await mealEventModel.findById(mealEventId);
@@ -138,5 +155,6 @@ module.exports = {
     getSelectedMenuItemsForMealEvent,
     getAllMealEvents,
     selectMealEvent,
-    deselectMealEvent
+    deselectMealEvent,
+    deleteMealEvent
 };
