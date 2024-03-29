@@ -8,11 +8,16 @@ import { MenuItem } from '../types/menuItems';
   providedIn: 'root'
 })
 export class MealItemService {
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
   getDishes(mealEventId: string): Observable<MenuItem[]> {
-    const {apiUrl} = environment;
-    return this.http.get<MenuItem[]>(`${apiUrl}/meal-events/${mealEventId}/menu-items`);
+    return this.http.get<MenuItem[]>(`${this.apiUrl}/meal-events/${mealEventId}/menu-items`);
   }
+
+  getAllMenuItems(): Observable<MenuItem[]> {
+    return this.http.get<MenuItem[]>(`${this.apiUrl}/menu-items`);
+  }
+
 }

@@ -36,16 +36,27 @@
     justify-content: flex-start; 
     gap: 10px;
     padding-top: 35px; 
+    transition: all 0.5s ease;
   }
   
   .icon img {
     width: 75px;
     height: auto; 
+    transition: transform 0.5s ease;
   }
   
   .icon-title {
     font-size: 1.25rem; 
     font-weight: bold;
+    transition: font-size 0.5s ease;
+  }
+
+    .icon:hover img {
+    transform: scale(0.95); 
+  }
+  
+  .icon:hover .icon-title {
+    font-size: 1.5rem; 
   }
   
   .table-title {
