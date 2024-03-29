@@ -1,0 +1,60 @@
+.table-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 4rem; /* Adjust as needed */
+    padding-bottom: 4rem; /* Space below the table */
+  }
+  
+  .div-2 {
+    font-family: Inter, sans-serif;
+    border-radius: 0px 0px 21px 21px;
+    border-color: rgba(0, 0, 0, 1);
+    border-style: solid;
+    border-width: 2px;
+    background-color: #fff;
+    align-self: center;
+    justify-content: center;
+    padding: 21px 48px;
+    width: fit-content; /* Adjust the width to fit the title */
+    margin-bottom: auto; /* Space below the title */
+  }
+  
+  .table-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+  }
+  
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(218, 218, 218, 0.85);
+    border-radius: 28px;
+    border: 2px solid rgba(0, 0, 0, 1);
+    margin-top: 5rem; /* Adjust this value to position the container lower on the page */
+    padding: 2rem;
+    max-width: 80%; /* Adjust width as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-content {
+    max-width: 90vw;
+    overflow-x: auto;
+  }
+  
+  .table-content table {
+    min-width: 600px;
+  }
+  
+  @media (max-width: 768px) {
+    .table-content {
+      max-width: 100%;
+    }
+    .div-2 {
+      padding: 21px 20px; /* Adjust padding for smaller screens */
+    }
+  }

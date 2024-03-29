@@ -1,7 +1,14 @@
-<div class="flex flex-col justify-start items-center pt-[14rem] min-h-screen">
-  <div @slideFade class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-3xl mx-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+<div @slideFade class="table-wrapper">
+  <div class="table-container">
+    <div class="div-2">
+      <div class="table-title">Created meal events</div>
+    </div>
+    <div class="table-content">
+<div class="relative overflow-x-auto overflow-y-auto shadow-md flex flex-col justify-start items-center pt-[14rem]">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-5xl mx-auto">
+    <div class="overflow-y-auto h-72">
+      <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
               <th scope="col" class="px-6 py-3">
                   Meal type
@@ -23,7 +30,7 @@
               </th>
           </tr>
       </thead>
-      <tbody>
+      <tbody class="overflow-y-auto h-36">
           <tr *ngFor="let event of mealEvents" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {{event.mealType}}
@@ -53,8 +60,14 @@
                 <button *ngIf="event._id" (click)="removeMealEvent()" class="font-medium text-red-600 dark:text-red-500 hover:underline">
                   Remove
                 </button>
+                <button *ngIf="event._id" (click)="deleteMealEvent(event._id)" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                  Delete
+                </button>
               </td>
           </tr>
       </tbody>
   </table>
 </div>
+</div>
+</div>
+

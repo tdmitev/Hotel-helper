@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { slideFade } from 'src/app/animations/animations';
+import { fadeIn, slideFade } from 'src/app/animations/animations';
 import { MealEventService } from 'src/app/services/meal-event.service';
 import { MealEvent } from 'src/app/types/meal-event';
 
@@ -7,7 +7,7 @@ import { MealEvent } from 'src/app/types/meal-event';
   selector: 'app-meal-event-list',
   templateUrl: './meal-event-list.component.html',
   styleUrls: ['./meal-event-list.component.css'],
-  animations: [slideFade]
+  animations: [slideFade, fadeIn]
 })
 export class MealEventListComponent implements OnInit {
   mealEvents: MealEvent[] = [];
@@ -48,4 +48,15 @@ export class MealEventListComponent implements OnInit {
       error: (error) => console.error('Неуспешно деселектиране на mealEvent', error)
     });
   }
+
+  deleteMealEvent(mealEventId: string): void {
+    this.mealEventService.deleteMealEvent(mealEventId).subscribe({
+      next: (response) => {
+        console.log('Meal event deleted successfully', response);
+        this.loadMealEvents();
+      },
+      error: (error) => console.error('Неуспешно изтриване на mealEvent', error)
+    });
+  }
+
 }

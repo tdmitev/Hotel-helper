@@ -24,4 +24,8 @@ export class MealEventService {
   deselectMealEvent(): Observable<any> { 
     return this.http.post(`${this.apiUrl}/deselect`, {});
   }
+
+  deleteMealEvent(mealEventId: string): Observable<MealEvent> {
+    return this.http.delete<MealEvent>(`${this.apiUrl}/${mealEventId}`);
+  }
 }
