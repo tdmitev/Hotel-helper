@@ -18,12 +18,22 @@ export class MealEventListComponent implements OnInit {
 
   ngOnInit() {
     this.loadMealEvents();
+    const storedSelectedMealEventId = sessionStorage.getItem('selectedMealEventId');
+    if (storedSelectedMealEventId) {
+      this.selectedMealEventId = storedSelectedMealEventId;
+    }
   }
 
   loadMealEvents(): void {
     this.mealEventService.getAllMealEvents().subscribe(mealEvents => {
-      this.mealEvents = mealEvents;
+      this.mealEvents = mealEvents.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     });
+  }
+
+  isEventToday(eventDate: Date | string): boolean {
+    const today = new Date();
+    const event = eventDate instanceof Date ? eventDate : new Date(eventDate);
+    return today.toDateString() === event.toDateString();
   }
 
   navigateToCreateMealEvent() {
@@ -34,7 +44,10 @@ export class MealEventListComponent implements OnInit {
     if (eventId) {
       this.selectedMealEventId = eventId;
       this.mealEventService.selectMealEvent(eventId).subscribe({
-        next: (response) => console.log('Meal event selected successfully', response),
+        next: (response) => {
+          console.log('Meal event selected successfully', response);
+          sessionStorage.setItem('selectedMealEventId', eventId);
+        },
         error: (error) => console.error('Неуспешен избор на mealEvent', error)
       });
     } else {
@@ -49,6 +62,7 @@ export class MealEventListComponent implements OnInit {
         console.log('Meal event deselected successfully', response);
         this.selectedMealEventId = null;
         this.loadMealEvents();
+        sessionStorage.removeItem('selectedMealEventId');
       },
       error: (error) => console.error('Неуспешно деселектиране на mealEvent', error)
     });
@@ -61,6 +75,7 @@ export class MealEventListComponent implements OnInit {
       this.mealEventService.deleteMealEvent(mealEventId).subscribe({
         next: (response) => {
           console.log('Meal event deleted successfully', response);
+          this.mealEvents = this.mealEvents.filter(event => event._id !== mealEventId);
         },
         error: (error) => console.error('Неуспешно изтриване на mealEvent', error)
       });

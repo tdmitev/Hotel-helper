@@ -97,3 +97,7 @@
       padding: 21px 20px; 
     }
   }
+
+  .bg-light-gray {
+    background-color: #f3f3f3; 
+  }

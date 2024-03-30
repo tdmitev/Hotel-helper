@@ -1,11 +1,11 @@
 <form [formGroup]="createMealEventForm" (ngSubmit)="onSubmit()">
-        <!-- Date Picker Input -->
-        <input formControlName="date" type="date">
-        
-        <!-- Meal Type Dropdown -->
-        <select formControlName="mealType">
-          <option *ngFor="let type of mealTypes" [value]="type">{{ type }}</option>
-        </select>
+    <input formControlName="date" type="date">
+
+    <select formControlName="mealType">
+        <option *ngFor="let type of mealTypes" [value]="type">{{ type }}</option>
+    </select>
+    <button type="submit">Create</button>
+</form>
 
 <div @slideFade class="table-wrapper">
     <div class="table-container">
@@ -70,9 +70,9 @@
                     </div>
                 </td>
                 <td>
-                    <button (click)="addMenuItem(items._id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    <button (click)="selectedMenuItems.includes(items._id) ? removeMenuItem(items._id) : addMenuItem(items._id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                         {{ selectedMenuItems.includes(items._id) ? 'Remove' : 'Add' }}
-                    </button>
+                      </button>
                   </td>
             </tr>
         </tbody>
@@ -81,4 +81,3 @@
     </div>
     </div>
 
-    <button type="submit">Create</button>

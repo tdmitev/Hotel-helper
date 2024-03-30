@@ -32,7 +32,6 @@ export class CreateMealEventComponent implements OnInit {
   }
 
   
-
   addMenuItem(itemId: string): void {
     if (!this.selectedMenuItems.includes(itemId)) {
       this.selectedMenuItems.push(itemId);
@@ -40,22 +39,30 @@ export class CreateMealEventComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (this.createMealEventForm.valid) {
-      const formValue = this.createMealEventForm.value;
-      const mealEvent: MealEvent = {
-        date: new Date(formValue.date),
-        mealType: formValue.mealType,
-        menuItems: formValue.menuItems,
-      };
+  removeMenuItem(itemId: string): void {
+    this.selectedMenuItems = this.selectedMenuItems.filter(item => item !== itemId);
+    console.log('selectedMenuItems:', this.selectedMenuItems);
+  }
 
+  onSubmit(): void {
+    console.log('Form Submitted', this.createMealEventForm.value);
+    console.log('Is Form Valid?', this.createMealEventForm.valid);
+    console.log('Selected menu items:', this.selectedMenuItems);
+  
+    this.createMealEventForm.setControl('menuItems', this.fb.array(this.selectedMenuItems || []));
+  
+    console.log('Updated Form Values:', this.createMealEventForm.value);
+  
+    if (this.createMealEventForm.valid) {
+      const mealEvent = this.createMealEventForm.value;
+      
       this.mealEventService.createMealEvent(mealEvent).subscribe({
-        next: response => {
+        next: (response) => {
           alert('Meal event created successfully!');
           this.createMealEventForm.reset();
           this.router.navigate(['/meal-events']);
         },
-        error: error => {
+        error: (error) => {
           alert('There was an error creating the meal event. Please try again.');
           console.error('Error creating meal event:', error);
         }
