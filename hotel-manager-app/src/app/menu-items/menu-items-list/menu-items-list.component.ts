@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { slideFade } from 'src/app/animations/animations';
 import { MealItemService } from 'src/app/services/meal-item.service';
 import { MenuItem } from 'src/app/types/menuItems';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-menu-items-list',
@@ -12,8 +14,16 @@ import { MenuItem } from 'src/app/types/menuItems';
 })
 export class MenuItemsListComponent implements OnInit {
   menuItems: MenuItem[] = [];
+  createMenuItemForm: FormGroup;
 
-  constructor(private menuItemService: MealItemService, private router: Router) {}
+  constructor(private fb: FormBuilder, private menuItemService: MealItemService, private router: Router, private messageService: MessageService) {
+    this.createMenuItemForm = this.fb.group({
+      name: ['', Validators.required],
+      image: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
+      description: ['', Validators.required],
+      category: ['', Validators.required]
+    });
+  }
 
   ngOnInit() {
     this.loadMenuItems();
@@ -25,5 +35,22 @@ export class MenuItemsListComponent implements OnInit {
     });
   }
 
+  onSubmit(): void {
+    if (this.createMenuItemForm.valid) {
+      const menuItem = this.createMenuItemForm.value;
+
+      this.menuItemService.createMenuItem(menuItem).subscribe({
+        next: () => {
+          this.messageService.setMessage('Menu item created successfully!');
+          this.loadMenuItems();
+          this.createMenuItemForm.reset();
+        },
+        error: (error) => {
+          alert('There was an error creating the menu item. Please try again.');
+          console.error(error);
+        }
+      });
+    }
+  }
 
 }

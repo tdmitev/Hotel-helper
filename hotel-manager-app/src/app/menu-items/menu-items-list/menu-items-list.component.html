@@ -8,12 +8,11 @@
       <div class="icon">
         <div class="create-meal-event-container">
             <img src="/assets/images/menuItem.png" class="form-icon" alt="Create Meal Event Icon">
-            <form class="create-meal-event-form">
-              <input formControlName="date" type="date">
-              <select formControlName="mealType">
-                <option value="" disabled selected>Choose meal</option>
-                
-              </select>
+            <form [formGroup]="createMenuItemForm" (ngSubmit)="onSubmit()" class="create-meal-event-form">
+              <input formControlName="name" type="string">
+              <input formControlName="image" type="string">
+              <input formControlName="description" type="string">
+              <input formControlName="category" type="string">
               <button type="submit">Create</button>
             </form>
           </div>
@@ -23,7 +22,7 @@
       <div class="table-content">
 <div class="relative overflow-x-auto overflow-y-auto shadow-md flex flex-col justify-start items-center pt-8">
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-5xl mx-auto">
-    <div class="overflow-y-auto h-82">
+    <div class="overflow-y-auto h-74">
       <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -41,7 +40,7 @@
                     Status
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Status
+                    Action
                 </th>
             </tr>
         </thead>

@@ -20,4 +20,8 @@ export class MealItemService {
     return this.http.get<MenuItem[]>(`${this.apiUrl}/menu-items`);
   }
 
+  createMenuItem(menuItem: MenuItem): Observable<MenuItem> {
+    return this.http.post<MenuItem>(`${this.apiUrl}/menu-items/create-menu-item`, menuItem);
+  }
+
 }
