@@ -8,5 +8,6 @@ export interface User {
     created_at: string;
     updated_at: string;
     __v: number;
+    token: string;
   }
   
