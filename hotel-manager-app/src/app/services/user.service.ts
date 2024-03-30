@@ -60,6 +60,7 @@ export class UserService {
   logout(): void {
     this.http.post(`${this.apiUrl}/logout`, { withCredentials: true }).subscribe({
       next: () => {
+        localStorage.removeItem('authToken');
         this.user = undefined;
         localStorage.removeItem(this.USER_KEY);
         console.log("Logout successful");

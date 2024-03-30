@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { MealEventsModule } from './meal-events/meal-events.module';
 import { CredentialsInterceptor } from './interceptors/http.interceptor';
+import { AuthGuard } from './utils/auth-guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CredentialsInterceptor } from './interceptors/http.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: CredentialsInterceptor,
       multi: true
-    }
+    },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
