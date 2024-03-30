@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { MealEventsModule } from './meal-events/meal-events.module';
 import { CredentialsInterceptor } from './interceptors/http.interceptor';
 import { AuthGuard } from './utils/auth-guard';
+import { MenuItemsModule } from './menu-items/menu-items.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthGuard } from './utils/auth-guard';
     HttpClientModule,
     UserRoutingModule,
     BrowserAnimationsModule,
-    MealEventsModule
+    MealEventsModule,
+    MenuItemsModule
   ],
   providers: [
     {

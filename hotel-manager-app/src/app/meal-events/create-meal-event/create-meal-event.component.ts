@@ -6,6 +6,7 @@ import { MealEventService } from 'src/app/services/meal-event.service';
 import {MealItemService} from 'src/app/services/meal-item.service';
 import { MealEvent } from 'src/app/types/meal-event';
 import { MenuItem } from 'src/app/types/menuItems';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-create-meal-event',
@@ -19,7 +20,7 @@ export class CreateMealEventComponent implements OnInit {
   menuItems: MenuItem[] = [];
   selectedMenuItems: string[] = [];
 
-  constructor(private fb: FormBuilder, private mealEventService: MealEventService, private MealItemService: MealItemService, private router: Router) {
+  constructor(private fb: FormBuilder, private mealEventService: MealEventService, private MealItemService: MealItemService, private messageService: MessageService,private router: Router) {
     this.createMealEventForm = this.fb.group({
       date: ['', Validators.required],
       mealType: ['', Validators.required],
@@ -58,7 +59,7 @@ export class CreateMealEventComponent implements OnInit {
       
       this.mealEventService.createMealEvent(mealEvent).subscribe({
         next: (response) => {
-          alert('Meal event created successfully!');
+          this.messageService.setMessage('Meal event created successfully!');
           this.createMealEventForm.reset();
           this.router.navigate(['/meal-events']);
         },

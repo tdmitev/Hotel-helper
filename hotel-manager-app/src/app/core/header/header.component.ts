@@ -24,6 +24,10 @@ export class HeaderComponent implements OnInit{
     return this.userService.isLogged;
   }
 
+  navigateToCreateMealEvent() {
+    this.router.navigate(['/meal-events/create-meal-event']);
+  }
+
   logout(): void {
     this.userService.logout();
     this.router.navigate(['/']);

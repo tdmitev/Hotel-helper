@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    padding-top: 50px; /* Changed to pixels */
+    padding-top: 30px; /* Changed to pixels */
     padding-bottom: 50px; /* Changed to pixels */
   }
   
@@ -87,7 +87,7 @@
   }
 
   .create-meal-event-form select {
-    padding: 0.4rem 1.9rem 0.4rem 0.4rem; /* Добавяме повече padding от дясната страна, за да създадем място за стрелката */
+    padding: 0.4rem 1.9rem 0.4rem 0.4rem; 
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f7f7f7;
@@ -129,7 +129,7 @@
     border-radius: 28px;
     border: 2px solid #06b;
     box-shadow: 0 4px 8px #06b;
-    margin-top: 10vh;
+    margin-top: 4vh;
     padding: 0px 20px 20px 20px; /* Adjusted padding and changed to pixels */
     max-width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

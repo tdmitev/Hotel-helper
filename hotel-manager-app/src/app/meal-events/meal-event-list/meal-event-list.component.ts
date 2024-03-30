@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { fadeIn, slideFade } from 'src/app/animations/animations';
 import { MealEventService } from 'src/app/services/meal-event.service';
+import { MessageService } from 'src/app/services/message.service';
 import { MealEvent } from 'src/app/types/meal-event';
 
 @Component({
@@ -13,8 +14,8 @@ import { MealEvent } from 'src/app/types/meal-event';
 export class MealEventListComponent implements OnInit {
   mealEvents: MealEvent[] = [];
   selectedMealEventId: string | null | undefined = null;
-
-  constructor(private mealEventService: MealEventService, private router: Router) {}
+  message: string | null = null;
+  constructor(private mealEventService: MealEventService, private router: Router, private messageService: MessageService) {}
 
   ngOnInit() {
     this.loadMealEvents();
@@ -22,7 +23,10 @@ export class MealEventListComponent implements OnInit {
     if (storedSelectedMealEventId) {
       this.selectedMealEventId = storedSelectedMealEventId;
     }
-  }
+    this.messageService.getMessage().subscribe((message) => {
+      this.message = message;
+    });
+}
 
   loadMealEvents(): void {
     this.mealEventService.getAllMealEvents().subscribe(mealEvents => {
