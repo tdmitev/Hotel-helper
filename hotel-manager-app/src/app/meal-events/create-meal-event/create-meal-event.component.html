@@ -1,11 +1,3 @@
-<form [formGroup]="createMealEventForm" (ngSubmit)="onSubmit()">
-    <input formControlName="date" type="date">
-
-    <select formControlName="mealType">
-        <option *ngFor="let type of mealTypes" [value]="type">{{ type }}</option>
-    </select>
-    <button type="submit">Create</button>
-</form>
 
 <div @slideFade class="table-wrapper">
     <div class="table-container">
@@ -14,8 +6,17 @@
         <div class="table-title">Create meal event</div>
       </div>
       <div class="icon">
-        <img src="/assets/images/mealEventIcon.png" alt="Create meal event">
-        <div class="icon-title">Create meal event </div>
+        <div class="create-meal-event-container">
+            <img src="/assets/images/mealEventIcon.png" class="form-icon" alt="Create Meal Event Icon">
+            <form [formGroup]="createMealEventForm" (ngSubmit)="onSubmit()" class="create-meal-event-form">
+              <input formControlName="date" type="date">
+              <select formControlName="mealType">
+                <option value="" disabled selected>Choose meal</option>
+                <option *ngFor="let type of mealTypes" [value]="type">{{ type }}</option>
+              </select>
+              <button type="submit">Create</button>
+            </form>
+          </div>
       </div>
 
 

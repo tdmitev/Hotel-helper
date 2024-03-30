@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { slideFade } from 'src/app/animations/animations';
+import { slideFade, slideInAnimation } from 'src/app/animations/animations';
 import { MealEventService } from 'src/app/services/meal-event.service';
 import {MealItemService} from 'src/app/services/meal-item.service';
 import { MealEvent } from 'src/app/types/meal-event';
@@ -11,7 +11,7 @@ import { MenuItem } from 'src/app/types/menuItems';
   selector: 'app-create-meal-event',
   templateUrl: './create-meal-event.component.html',
   styleUrls: ['./create-meal-event.component.css'],
-  animations: [slideFade]
+  animations: [slideFade, slideInAnimation]
 })
 export class CreateMealEventComponent implements OnInit {
   createMealEventForm: FormGroup;

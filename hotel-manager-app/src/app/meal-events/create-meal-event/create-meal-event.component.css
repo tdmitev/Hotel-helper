@@ -39,24 +39,88 @@
     transition: all 0.5s ease;
   }
   
-  .icon img {
-    width: 75px;
-    height: auto; 
-    transition: transform 0.5s ease;
+
+  .create-meal-event-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    background-color: white; 
+    border-radius: 30px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 1rem; 
+    max-width: 700px; 
+    margin: auto; 
   }
   
-  .icon-title {
-    font-size: 1.25rem; 
-    font-weight: bold;
-    transition: font-size 0.5s ease;
+  
+  .form-icon {
+    width: 100px;
+    height: auto;
+    margin-right: 1rem;
+    transform: translateX(0%);
+    opacity: 0;
+    animation: slideIconIn 0.5s forwards;
+  }
+  
+  @keyframes slideIconIn {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .create-meal-event-form {
+    transform: translateX(-10%);
+    opacity: 0;
+    animation: slideFormIn 0.5s 0.5s forwards;
+    display: flex; 
+    align-items: center; 
+  }
+  
+  @keyframes slideFormIn {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .create-meal-event-form input,
+  .create-meal-event-form select,
+  .create-meal-event-form button {
+    padding: 0.4rem;
+    margin: 0 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f7f7f7; 
   }
 
-    .icon:hover img {
-    transform: scale(0.95); 
+  .create-meal-event-form select {
+    padding: 0.4rem 1.9rem 0.4rem 0.4rem; /* Добавяме повече padding от дясната страна, за да създадем място за стрелката */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    cursor: pointer;
   }
   
-  .icon:hover .icon-title {
-    font-size: 1.5rem; 
+  .create-meal-event-form button {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    border-radius: 20px;
+    padding: 0.5rem 1rem; 
+  }
+
+  .create-meal-event-form input::placeholder,
+  .create-meal-event-form select::placeholder {
+    color: #aaa;
+  }
+  
+  .create-meal-event-form input:focus,
+  .create-meal-event-form select:focus,
+  .create-meal-event-form button:focus {
+    outline: none; 
+    border-color: #007bff; 
   }
   
   .table-title {

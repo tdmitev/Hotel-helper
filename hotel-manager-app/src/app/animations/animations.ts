@@ -24,6 +24,20 @@ export const slideFade = trigger('slideFade', [
   ]),
 ]);
 
+export const slideInAnimation = trigger('slideIn', [
+  state('in', style({
+    transform: 'translateX(0)',
+    opacity: 1
+  })),
+  transition(':enter', [
+    style({
+      transform: 'translateX(-100%)',
+      opacity: 0
+    }),
+    animate('0.5s ease-out')
+  ])
+]);
+
 export const dropDown = trigger('dropdown', [
     state('closed', style({
       height: '0',
