@@ -17,13 +17,14 @@ export class MenuItemsListComponent implements OnInit {
   menuItems: MenuItem[] = [];
   createMenuItemForm: FormGroup;
   formSubmitted = false;
+  currentMenuItemId: string | null = null;
 
   constructor(private fb: FormBuilder, private menuItemService: MealItemService, private router: Router, private messageService: MessageService, private mealEventService: MealEventService) {
     this.createMenuItemForm = this.fb.group({
       name: ['', Validators.required],
       image: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
-      description: ['', Validators.required],
-      category: ['', Validators.required]
+      description: ['', [Validators.required, Validators.minLength(10)]],
+      category: ['', [Validators.required, Validators.minLength(5)]]
     });
   }
 
@@ -54,25 +55,63 @@ export class MenuItemsListComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
- 
-    this.formSubmitted = true;
-    if (this.createMenuItemForm.valid) {
-      const menuItem = this.createMenuItemForm.value;
+  onEditMenuItem(menuItemId: string): void {
+    const menuItem = this.menuItems.find(item => item._id === menuItemId);
+  
+    if (!menuItem) {
+      console.error('MenuItem not found');
+      return;
+    }
+  
+    this.currentMenuItemId = menuItem._id;
+    this.createMenuItemForm.patchValue({
+      name: menuItem.name,
+      image: menuItem.image,
+      description: menuItem.description,
+      category: menuItem.category
+    });
+  }
 
-      this.menuItemService.createMenuItem(menuItem).subscribe({
-        next: () => {
-          this.messageService.setMessage('Menu item created successfully!');
-          this.loadMenuItems();
-          this.createMenuItemForm.reset();
-        },
-        error: (error) => {
-          alert('There was an error creating the menu item. Please try again.');
-          console.error(error);
-        }
-      });
+  onSubmit(): void {
+    this.formSubmitted = true;
+    
+    if (this.createMenuItemForm.valid) {
+      const menuItemData = this.createMenuItemForm.value;
+  
+      if (this.currentMenuItemId) {
+        this.menuItemService.editMenuItem(this.currentMenuItemId, menuItemData).subscribe({
+          next: () => {
+            this.messageService.setMessage('Menu item updated successfully!');
+            this.loadMenuItems(); 
+            this.createMenuItemForm.reset();
+            this.currentMenuItemId = null; 
+            this.formSubmitted = false;
+          },
+          error: (error) => {
+            alert('There was an error updating the menu item. Please try again.');
+            console.error(error);
+          }
+        });
+      } else {
+        if(this.createMenuItemForm.valid) {
+        this.menuItemService.createMenuItem(menuItemData).subscribe({
+          next: () => {
+            this.messageService.setMessage('Menu item created successfully!');
+            this.loadMenuItems(); 
+            this.createMenuItemForm.reset();
+            this.formSubmitted = false;
+          },
+          error: (error) => {
+            alert('There was an error creating the menu item. Please try again.');
+            console.error(error);
+          }
+        });
+      }
+    }
     }
   }
+
+
 
   addMenuItemToMealEvent(itemId: string): void {
     const mealEventId = sessionStorage.getItem('selectedMealEventId');
@@ -143,4 +182,21 @@ export class MenuItemsListComponent implements OnInit {
       }
     });
   }
+
+  onDeleteMenuItem(menuItemId: string): void {
+    const confirmation = confirm('Are you sure you want to delete this MenuItem?');
+    if (!confirmation) {
+      return;
+    }
+
+    this.menuItemService.deleteMenuItem(menuItemId).subscribe({
+      next: () => {
+        this.messageService.setMessage('MenuItem deleted successfully');
+        console.log('MenuItem deleted successfully');
+        this.loadMenuItemsAndMarkSelected();
+      },
+      error: (error) => console.error('Error deleting MenuItem:', error)
+    });
+  }
+
 }

@@ -24,4 +24,12 @@ export class MealItemService {
     return this.http.post<MenuItem>(`${this.apiUrl}/menu-items/create-menu-item`, menuItem);
   }
 
+  editMenuItem(menuItemId: string, updateData: MenuItem): Observable<MenuItem> {
+    return this.http.put<MenuItem>(`${this.apiUrl}/menu-items/${menuItemId}`, updateData);
+  }
+
+  deleteMenuItem(menuItemId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/menu-items/${menuItemId}`);
+  }
+
 }
