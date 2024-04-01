@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MealEvent } from '../types/meal-event'; 
-import { MenuItem } from '../types/menuItems';
 import { environment } from 'src/environments/environment';
+import { MenuItem } from '../types/menuItems';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,6 @@ export class MealEventService {
   getSelectedMenuItemsForMealEvent(mealEventId: string): Observable<MenuItem[]> {
     return this.http.get<MenuItem[]>(`${this.apiUrl}/menu-items?mealEventId=${mealEventId}`);
   }
-
 
 
 

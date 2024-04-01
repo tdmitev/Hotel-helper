@@ -1,17 +1,21 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from "rxjs";
+
+export interface Message {
+  text: string;
+  type: 'success' | 'error';
+}
 
 @Injectable({ providedIn: 'root' })
 export class MessageService {
-  private message = new BehaviorSubject<string | null>(null);
+  private message = new BehaviorSubject<Message | null>(null);
 
-  setMessage(message: string) {
-    this.message.next(message);
+  setMessage(text: string, type: 'success' | 'error' = 'success') {
+    this.message.next({ text, type });
     setTimeout(() => this.message.next(null), 4000); 
   }
 
-  getMessage(): Observable<string | null> {
+  getMessage(): Observable<Message | null> {
     return this.message.asObservable();
   }
 }

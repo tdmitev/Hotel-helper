@@ -108,7 +108,7 @@ function addMenuItemToMealEvent(req, res, next) {
 
 function removeMenuItemFromMealEvent(req, res, next) {
     const mealEventId = req.session.selectedMealEventId;
-    const { menuItemId } = req.body; 
+    const menuItemId = req.params.menuItemId;
     
     mealEventModel.findByIdAndUpdate(
         mealEventId,
