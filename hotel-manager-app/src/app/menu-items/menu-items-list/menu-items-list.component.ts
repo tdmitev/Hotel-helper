@@ -15,6 +15,7 @@ import { MessageService } from 'src/app/services/message.service';
 export class MenuItemsListComponent implements OnInit {
   menuItems: MenuItem[] = [];
   createMenuItemForm: FormGroup;
+  formSubmitted = false;
 
   constructor(private fb: FormBuilder, private menuItemService: MealItemService, private router: Router, private messageService: MessageService) {
     this.createMenuItemForm = this.fb.group({
@@ -36,6 +37,8 @@ export class MenuItemsListComponent implements OnInit {
   }
 
   onSubmit(): void {
+ 
+    this.formSubmitted = true;
     if (this.createMenuItemForm.valid) {
       const menuItem = this.createMenuItemForm.value;
 
@@ -51,6 +54,11 @@ export class MenuItemsListComponent implements OnInit {
         }
       });
     }
+  }
+
+  addMenuItem(itemId: string): void {
+    const mealEventId = sessionStorage.getItem('mealEventId');
+
   }
 
 }

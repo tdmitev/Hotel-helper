@@ -1,4 +1,10 @@
 
+<div *ngIf="formSubmitted && createMenuItemForm.get('name')?.errors?.['required']" class="error-message">Name is required.</div>
+<div *ngIf="formSubmitted && createMenuItemForm.get('image')?.errors?.['required']" class="error-message">Image is required.</div>
+<div *ngIf="formSubmitted && createMenuItemForm.get('image')?.errors?.['pattern']" class="error-message">Please provide a valid URL for the image.</div>
+<div *ngIf="formSubmitted && createMenuItemForm.get('description')?.errors?.['required']" class="error-message">Description is required.</div>
+<div *ngIf="formSubmitted && createMenuItemForm.get('category')?.errors?.['required']" class="error-message">Category is required.</div>
+
 <div @slideFade class="table-wrapper">
     <div class="table-container">
       <div class="div-2">
@@ -9,10 +15,10 @@
         <div class="create-meal-event-container">
             <img src="/assets/images/menuItem.png" class="form-icon" alt="Create Meal Event Icon">
             <form [formGroup]="createMenuItemForm" (ngSubmit)="onSubmit()" class="create-meal-event-form">
-              <input formControlName="name" type="string">
-              <input formControlName="image" type="string">
-              <input formControlName="description" type="string">
-              <input formControlName="category" type="string">
+              <input formControlName="name" type="string" placeholder="name"> 
+              <input formControlName="image" type="string" placeholder="image">
+              <input formControlName="description" type="string" placeholder="description">
+              <input formControlName="category" type="string" placeholder="category">
               <button type="submit">Create</button>
             </form>
           </div>
@@ -21,7 +27,7 @@
 
       <div class="table-content">
 <div class="relative overflow-x-auto overflow-y-auto shadow-md flex flex-col justify-start items-center pt-8">
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-5xl mx-auto">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-7xl mx-auto">
     <div class="overflow-y-auto h-74">
       <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -40,7 +46,7 @@
                     Status
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Action
+                    Meal event / Action
                 </th>
             </tr>
         </thead>
@@ -50,7 +56,7 @@
                     <img class="w-10 h-10 rounded-full" src="{{items.image}}" alt="Dish">
                     <div class="ps-3">
                         <div class="text-base font-semibold">{{items.name}}</div>
-                        <div class="font-normal text-gray-500">Ingredients: 
+                        <div class="font-normal text-gray-500">Created: 
                             <span class="font-medium">{{items.created_at | date: 'mediumDate'}}</span>
                         </div>
                     </div>  
@@ -69,10 +75,22 @@
                         <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Not selected
                     </div>
                 </td>
-                <td>
+                <td class="flex items-center px-6 py-1 space-x-3">
                     <button  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        <a >Add</a>
+                      </button>
+                      <button  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        <a >Remove</a>
                       </button>
                   </td>
+                  <td class="flex items-center px-6 py-1 space-x-3">
+                    <button  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                      <a >Edit</a>
+                    </button>
+                    <button  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        <a >Delete</a>
+                      </button>
+                </td>
             </tr>
         </tbody>
     </table>

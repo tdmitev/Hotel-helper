@@ -1,3 +1,5 @@
+<div *ngIf="formSubmitted && createMealEventForm.get('date')?.errors?.['required']" class="error-message">Date is required.</div>
+<div *ngIf="formSubmitted && createMealEventForm.get('mealType')?.errors?.['required']" class="error-message">Meal type is required.</div>
 
 <div @slideFade class="table-wrapper">
     <div class="table-container">

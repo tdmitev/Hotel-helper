@@ -18,7 +18,7 @@
     background-image: url('../assets/images/hotel.png');
     background-size: cover;
     background-position: center;
-    z-index: -1; /* Уверете се, че е зад съдържанието */
+    z-index: -1; 
     transition: opacity 0.5s ease-in-out;
   }
   
@@ -50,7 +50,8 @@
     justify-content: center;
     align-items: center;
   }
-  
+
+
   @keyframes slideIn {
     from {
       top: 80px;
@@ -71,3 +72,4 @@
     }
   }
   
+

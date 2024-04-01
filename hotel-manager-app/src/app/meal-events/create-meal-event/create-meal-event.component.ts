@@ -19,6 +19,7 @@ export class CreateMealEventComponent implements OnInit {
   mealTypes = ['breakfast', 'lunch', 'dinner'];
   menuItems: MenuItem[] = [];
   selectedMenuItems: string[] = [];
+  formSubmitted = false;
 
   constructor(private fb: FormBuilder, private mealEventService: MealEventService, private MealItemService: MealItemService, private messageService: MessageService,private router: Router) {
     this.createMealEventForm = this.fb.group({
@@ -33,15 +34,17 @@ export class CreateMealEventComponent implements OnInit {
   }
 
   
-  addMenuItem(itemId: string): void {
+ addMenuItem(itemId: string): void {
     if (!this.selectedMenuItems.includes(itemId)) {
       this.selectedMenuItems.push(itemId);
+      this.messageService.setMessage('Menu item added successfully!');
       console.log('selectedMenuItems:', this.selectedMenuItems);
     }
   }
 
   removeMenuItem(itemId: string): void {
     this.selectedMenuItems = this.selectedMenuItems.filter(item => item !== itemId);
+    this.messageService.setMessage('Menu item removed successfully!');
     console.log('selectedMenuItems:', this.selectedMenuItems);
   }
 
@@ -50,6 +53,7 @@ export class CreateMealEventComponent implements OnInit {
     console.log('Is Form Valid?', this.createMealEventForm.valid);
     console.log('Selected menu items:', this.selectedMenuItems);
   
+    this.formSubmitted = true;
     this.createMealEventForm.setControl('menuItems', this.fb.array(this.selectedMenuItems || []));
   
     console.log('Updated Form Values:', this.createMealEventForm.value);
