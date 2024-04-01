@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { fadeIn, slideFade } from 'src/app/animations/animations';
 import { MealEventService } from 'src/app/services/meal-event.service';
-import { MessageService } from 'src/app/services/message.service';
+import { Message, MessageService } from 'src/app/services/message.service';
 import { MealEvent } from 'src/app/types/meal-event';
 
 @Component({
@@ -14,7 +14,7 @@ import { MealEvent } from 'src/app/types/meal-event';
 export class MealEventListComponent implements OnInit {
   mealEvents: MealEvent[] = [];
   selectedMealEventId: string | null | undefined = null;
-  message: string | null = null;
+  message: Message | null = null;
   constructor(private mealEventService: MealEventService, private router: Router, private messageService: MessageService) {}
 
   ngOnInit() {

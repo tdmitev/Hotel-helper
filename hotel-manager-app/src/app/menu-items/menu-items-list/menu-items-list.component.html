@@ -68,18 +68,18 @@
                     <div class="font-medium text-blue-600 dark:text-blue-500 hover:underline">{{items.category}}</div>
                 </td>
                 <td class="px-6 py-4">
-                    <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Selected
-                      </div>
-                      <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Not selected
-                    </div>
+                  <div *ngIf="items.selected" class="flex items-center">
+                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Selected
+                  </div>
+                  <div *ngIf="!items.selected" class="flex items-center">
+                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Not selected
+                  </div>
                 </td>
                 <td class="flex items-center px-6 py-1 space-x-3">
-                    <button  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        <a >Add</a>
+                    <button  (click)="addMenuItemToMealEvent(items._id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        <a>Add</a>
                       </button>
-                      <button  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                      <button (click)="removeMenuItemFromMealEvent(items._id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                         <a >Remove</a>
                       </button>
                   </td>

@@ -1,5 +1,7 @@
 <div class="background-container" [class.faded-background]="isFaded"></div>
-<div *ngIf="message" class="welcome-message">{{ message }}</div>
+<div *ngIf="message" [ngClass]="{'error-message': message.type === 'error', 'welcome-message': true}">
+  {{ message.text }}
+</div>
 
 <div class="main-content">
   <app-header></app-header>

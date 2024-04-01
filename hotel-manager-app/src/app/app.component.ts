@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core';
 import { NavigationEnd, Router, Event as RouterEvent } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { filter } from 'rxjs/operators';
-import { MessageService } from './services/message.service';
+import { Message, MessageService } from './services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'hotel-manager-app';
 
   isFaded: boolean = false;
-  message: string | null = null;
+  message: Message | null = null;
 
   constructor(private router: Router, private messageService: MessageService) {
     this.router.events.pipe(
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     initFlowbite();
 
-    this.messageService.getMessage().subscribe((message) => {
+    this.messageService.getMessage().subscribe(message => {
       this.message = message;
     });
     
