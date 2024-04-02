@@ -11,7 +11,7 @@ import { AddGuestsComponent } from './add-guests/add-guests.component';
   ],
   imports: [
     CommonModule,
-    GuestsRoutingModule
+    GuestsRoutingModule,
   ]
 })
 export class GuestsModule { }
