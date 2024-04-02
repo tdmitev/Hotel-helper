@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { slideFade } from 'src/app/animations/animations';
 import { GuestService } from 'src/app/services/guest.service';
+import { MessageService } from 'src/app/services/message.service';
 import { Guest } from 'src/app/types/guest';
+import { MealEvent } from 'src/app/types/meal-event';
 
 @Component({
   selector: 'app-add-guests',
@@ -11,8 +13,9 @@ import { Guest } from 'src/app/types/guest';
 })
 export class AddGuestsComponent implements OnInit {
   guests: Guest[] = [];
+  
 
-  constructor(private guestService: GuestService) { }
+  constructor(private guestService: GuestService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.loadGuests();
@@ -25,16 +28,26 @@ export class AddGuestsComponent implements OnInit {
     });
   }
 
+  
+
   checkInGuest(guestId: string): void {
     const mealEventId = sessionStorage.getItem('selectedMealEventId');
+  
     if (!mealEventId) {
       console.error('Meal event ID is not set');
       return;
     }
   
     this.guestService.checkInGuest(guestId, mealEventId).subscribe({
-      next: () => console.log('Guest checked in successfully'),
-      error: (error) => console.error('Check-in failed:', error)
+      next: () => {     
+        this.messageService.setMessage('Guest checked in successfully!');
+      }, 
+      error: (error) => {
+        this.messageService.setMessage('Guest already checked in!', "error");
+        console.error('Check-in failed:', error)
+      }
     });
   }
+
+
 }
