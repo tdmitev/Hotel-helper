@@ -1,1 +1,97 @@
-<p>add-guests works!</p>
+<div @slideFade class="table-wrapper">
+    <div class="table-container">
+      <div class="div-2">
+        <img src="/assets/images/food.png" alt="Meal Icon">
+        <div class="table-title">Guests list</div>
+      </div>
+
+
+      <div class="icon">
+        <img src="/assets/images/mealEventIcon.png" alt="Create meal event">
+        <div class="icon-title">Create meal event </div>
+      </div>
+
+
+      <div class="table-content">
+  <div class="relative overflow-x-auto overflow-y-auto shadow-md flex flex-col justify-start items-center pt-8">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-7xl mx-auto">
+      <div class="overflow-y-auto h-82">
+        <table class="min-w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Age
+                </th>
+                <th scope="col" class="px-6 py-3">
+                   Gender
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Room number
+                </th>
+                <th class="px-6 py-3">
+                  Stay period
+              </th>
+              <th class="px-6 py-3">
+                Tel
+            </th>
+              <th class="px-6 py-3">
+                View
+            </th>
+            <th class="px-6 py-3">
+                Status
+            </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody class="overflow-y-auto h-36">
+            <tr *ngFor="let guest of guests" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{guest.name}}
+                </th>
+                <td class="px-6 py-4">
+                    {{guest.age}}
+                </td>
+                <td class="px-6 py-4">
+                   {{guest.gender}}
+                </td>
+                <td class="px-6 py-4">
+                     {{guest.roomNumber}}
+                </td>
+                <td class="px-6 py-4">
+                    {{ guest.stayPeriod.from | date: 'mediumDate' }} - {{ guest.stayPeriod.to | date: 'mediumDate' }}
+               </td>
+               <td class="px-6 py-4">
+                {{guest.tel}}
+               </td>
+               <td class="px-6 py-4">
+                {{guest.view}}
+               </td>
+                <td class="px-6 py-4">
+                  <div  class="flex items-center">
+                      <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Selected
+                  </div>
+                  <div>  -                 
+                  </div>
+              </td>
+  
+                <td class="flex items-center px-6 py-4 space-x-3">
+                  <button  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    Check in
+                  </button> 
+                  <button  class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                    Check out
+                  </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  </div>
+  </div>
+  
+  
