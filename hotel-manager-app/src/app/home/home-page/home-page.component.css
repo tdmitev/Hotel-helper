@@ -1,0 +1,11 @@
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+  }
+
+.chart{
+    width: 520px; 
+    height: 520px; 
+}
