@@ -5,6 +5,7 @@ import { Inject } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { RouterLinkActive } from '@angular/router';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit{
 
   dishes: MenuItem[] = [];
 
-  constructor(@Inject(MealItemService) private mealItemService: MealItemService, private userService: UserService, private router: Router) { }
+  constructor(@Inject(MealItemService) private mealItemService: MealItemService, private userService: UserService, private router: Router, private messageService: MessageService) { }
 
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit{
 
   logout(): void {
     this.userService.logout();
+    this.messageService.setMessage('Logged out successfully!');
     this.router.navigate(['/']);
   }
 
