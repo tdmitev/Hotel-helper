@@ -14,11 +14,13 @@ import { AuthGuard } from './utils/auth-guard';
 import { MenuItemsModule } from './menu-items/menu-items.module';
 import { GuestsModule } from './guests/guests.module';
 import { MenuModule } from './menu/menu.module';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,
