@@ -1,6 +1,18 @@
+
+<div *ngIf="!isLoggedIn" class="hotel-container" @fadeIn>
+    <div class="welcome-banner">Welcome to our hotel!</div>
+    <div class="images-container">
+        <img src="/assets/images/DBL.png" alt="Room View" class="hotel-image"/>
+        <img src="/assets/images/room.png" alt="Room View" class="hotel-image"/>
+        <img src="/assets/images/Aprt.png" alt="Room View" class="hotel-image"/>
+    </div>
+</div>
+
+
+
 <div class="center-container">
-    
 <div *ngIf="isLoggedIn" class="chart">
 <app-pie-chart/>
 </div>
 </div>
+
