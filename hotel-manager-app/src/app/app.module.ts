@@ -13,6 +13,7 @@ import { CredentialsInterceptor } from './interceptors/http.interceptor';
 import { AuthGuard } from './utils/auth-guard';
 import { MenuItemsModule } from './menu-items/menu-items.module';
 import { GuestsModule } from './guests/guests.module';
+import { MenuModule } from './menu/menu.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { GuestsModule } from './guests/guests.module';
     BrowserAnimationsModule,
     MealEventsModule,
     MenuItemsModule,
-    GuestsModule
+    GuestsModule,
+    MenuModule
   ],
   providers: [
     {

@@ -158,22 +158,21 @@
 
 
 .input-container select.input {
-  appearance: none; /* Премахва стандартния вид на select контрола */
-  -webkit-appearance: none; /* Същото за WebKit браузъри */
-  -moz-appearance: none; /* Същото за Mozilla браузъри */
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
   background: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat, #242531;
-  background-position: right 10px top 50%, 0 0; /* Позиционира иконката на стрелката вдясно */
-  background-size: 12px, 100%; /* Размер на иконката */
-  cursor: pointer; /* Променя курсора, за да показва, че елементът може да бъде кликнат */
+  background-position: right 10px top 50%, 0 0; 
+  background-size: 12px, 100%; 
+  cursor: pointer; 
 }
 
 .input-container::after {
-  content: none; /* Ако сте използвали ::after псевдо-елемент за стрелка, може да искате да го премахнете, тъй като добавихме иконка чрез CSS */
+  content: none; 
 }
-  
-  /* Стил за стрелката на dropdown, ако искате да добавите своя собствена иконка/стрелка */
+
   .input::-ms-expand {
-    display: none; /* Скрива стрелката в IE */
+    display: none; 
   }
   
   .input-container {

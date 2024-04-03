@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
       filter((event: RouterEvent) => event instanceof NavigationEnd)
     ).subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isFaded = event.urlAfterRedirects === '/register', '/login';
+        this.isFaded = event.urlAfterRedirects === '/register', '/login', '/menu';
       }
     });
   }
