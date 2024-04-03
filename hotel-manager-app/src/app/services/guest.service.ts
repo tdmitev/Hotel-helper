@@ -12,13 +12,16 @@ export class GuestService {
 
   constructor(private http: HttpClient) {}
 
-  getGuestsByRoom(roomNumber: string): Observable<Guest[]> {
-    const params = new HttpParams().set('roomNumber', roomNumber);
-    return this.http.get<Guest[]>(`${this.apiUrl}/room`, { params });
-  }
-
   getGuests(): Observable<Guest[]> {
     return this.http.get<Guest[]>(`${this.apiUrl}`);
+  }
+
+  findGuestByName(name: string): Observable<Guest[]> {
+    return this.http.get<Guest[]>(`${this.apiUrl}/statistics/checked-in-guests?name=${name}`);
+  }
+
+  getGuestsByRoom(roomNumber: string): Observable<Guest[]> {
+    return this.http.get<Guest[]>(`${this.apiUrl}/statistics/checked-in-guests?roomNumber=${roomNumber}`);
   }
 
   checkInGuest(guestId: string, mealEventId: string): Observable<void> {

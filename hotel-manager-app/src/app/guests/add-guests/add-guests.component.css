@@ -3,8 +3,8 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    padding-top: 50px; /* Changed to pixels */
-    padding-bottom: 50px; /* Changed to pixels */
+    padding-top: 50px; 
+    padding-bottom: 50px; 
   }
   
   .div-2 {

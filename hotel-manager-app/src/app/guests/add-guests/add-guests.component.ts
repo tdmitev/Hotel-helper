@@ -15,6 +15,7 @@ import { MealEventService } from 'src/app/services/meal-event.service';
 export class AddGuestsComponent implements OnInit {
   guests: Guest[] = [];
   mealEvent: MealEvent | undefined;
+  searchInput: string = '';
 
   constructor(private guestService: GuestService, private messageService: MessageService, private mealEventService: MealEventService) { }
 
@@ -26,7 +27,7 @@ export class AddGuestsComponent implements OnInit {
   loadGuests(): void {
     this.guestService.getGuests().subscribe({
       next: (guests) => {
-        console.log('Guests loaded:', guests); // Това ще покаже списъка с гости, включително всички промени
+        console.log('Guests loaded:', guests); 
         this.guests = guests;
       },
       error: (error) => console.error('Failed to load guests:', error)
@@ -55,7 +56,7 @@ export class AddGuestsComponent implements OnInit {
   
     this.guestService.checkInGuest(guestId, mealEventId).subscribe({
       next: (data) => {     
-        console.log('Check-in successful. Data:', data); // Проверете данните, връщани от сървъра
+        console.log('Check-in successful. Data:', data); 
         this.messageService.setMessage('Guest checked in successfully!');
         this.loadGuests();
         this.loadMealEvent();
@@ -80,6 +81,27 @@ export class AddGuestsComponent implements OnInit {
         this.messageService.setMessage('Guest already checked out!', "error");
       }
     });
+  }
+
+  onSearchChange(event: Event): void {
+    const target = event.target as HTMLInputElement | null;
+  
+    if (!target || !target.value.trim()) {
+      this.loadGuests();
+      return; 
+    }
+  
+    const searchValue = target.value.trim();
+    
+    if (isNaN(Number(searchValue))) {
+      this.guestService.findGuestByName(searchValue).subscribe(guests => {
+        this.guests = guests;
+      });
+    } else {
+      this.guestService.getGuestsByRoom(searchValue).subscribe(guests => {
+        this.guests = guests;
+      });
+    }
   }
 
 
