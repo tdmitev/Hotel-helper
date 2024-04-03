@@ -50,11 +50,12 @@ async function getMealEventById(mealEventId) {
 }
 
 async function getMealEventByIdFr(req, res, next) {
+    const mealEventId = req.session.mealEventId;
+
     try {
-        const { mealEventId } = req.params;
         const mealEvent = await mealEventModel.findById(mealEventId);
         if (!mealEvent) {
-            return res.status(404).json({ message: "Meal event not found." });
+            return res.status(404).send({ message: "Meal event not found." });
         }
         res.json(mealEvent);
     } catch (error) {
@@ -169,8 +170,8 @@ module.exports = {
     removeMenuItemFromMealEvent,
     getSelectedMenuItemsForMealEvent,
     getAllMealEvents,
-    getMealEventByIdFr,
     selectMealEvent,
     deselectMealEvent,
-    deleteMealEvent
+    deleteMealEvent, 
+    getMealEventByIdFr
 };
