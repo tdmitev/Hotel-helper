@@ -3,7 +3,7 @@
     <div class="table-title">Menu</div>
   </div>
   
-  <div *ngIf="menuItems.length; else noItems" class="menu-container">
+  <div @fadeIn *ngIf="menuItems.length; else noItems" class="menu-container">
     <div *ngFor="let item of menuItems" class="menu-item">
       <img src="{{item.image}}" alt="Dish Name" class="menu-image">
       <h3 class="menu-name">{{item.name}}</h3>

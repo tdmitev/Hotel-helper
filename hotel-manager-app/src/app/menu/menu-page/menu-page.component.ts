@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { fadeIn } from 'src/app/animations/animations';
 import { MealEventService } from 'src/app/services/meal-event.service';
 import { MenuItem } from 'src/app/types/menuItems';
 
 @Component({
   selector: 'app-menu-page',
   templateUrl: './menu-page.component.html',
-  styleUrls: ['./menu-page.component.css']
+  styleUrls: ['./menu-page.component.css'],
+  animations: [fadeIn]
 })
 export class MenuPageComponent implements OnInit {
   menuItems: MenuItem[] = [];
