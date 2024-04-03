@@ -62,7 +62,6 @@ export class MenuItemsListComponent implements OnInit {
       console.error('MenuItem not found');
       return;
     }
-  
     this.currentMenuItemId = menuItem._id;
     this.createMenuItemForm.patchValue({
       name: menuItem.name,
@@ -82,7 +81,7 @@ export class MenuItemsListComponent implements OnInit {
         this.menuItemService.editMenuItem(this.currentMenuItemId, menuItemData).subscribe({
           next: () => {
             this.messageService.setMessage('Menu item updated successfully!');
-            this.loadMenuItems(); 
+            this.loadMenuItemsAndMarkSelected();
             this.createMenuItemForm.reset();
             this.currentMenuItemId = null; 
             this.formSubmitted = false;
