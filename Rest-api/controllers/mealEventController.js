@@ -50,7 +50,7 @@ async function getMealEventById(mealEventId) {
 }
 
 async function getMealEventByIdFr(req, res, next) {
-    const mealEventId = req.session.mealEventId;
+    const mealEventId = req.session.selectedMealEventId;
 
     try {
         const mealEvent = await mealEventModel.findById(mealEventId);

@@ -71,13 +71,15 @@
                <td class="px-6 py-4">
                 {{guest.view}}
                </td>
-                <td class="px-6 py-4">
-                  <div  class="flex items-center">
-                      <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Attended
+               <td class="px-6 py-4">
+                <div *ngIf="isGuestAttended(guest._id); else notAttended" class="flex items-center">
+                  <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Attended
+                </div>
+                <ng-template #notAttended>
+                  <div class="flex items-center">
+                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Not attended
                   </div>
-                  <div>  
-                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Not attended            
-                  </div>
+                </ng-template>
               </td>
   
                 <td class="flex items-center px-6 py-4 space-x-3">

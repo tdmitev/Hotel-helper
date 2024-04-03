@@ -5,6 +5,7 @@ export interface Guest {
     tel: string;
     gender: 'male' | 'female' | 'other';
     roomNumber: number;
+    attended?: boolean;
     stayPeriod: {
       from: Date;
       to: Date;

@@ -22,6 +22,10 @@ export class MealEventService {
     return this.http.get<MealEvent>(`${this.apiUrl}/select/${mealEventId}`);
   }
 
+  getMealEventByIdInfo(mealEventId: string): Observable<MealEvent> {
+    return this.http.get<MealEvent>(`${this.apiUrl}/guests/${mealEventId}`);
+  }
+
   addMenuItemToMealEvent(mealEventId: string, menuItemId: string): Observable<{ message: string }> { 
     return this.http.post<{ message: string }>(`${this.apiUrl}/menu-items/add-menu-item`, { mealEventId, menuItemId });
   }
