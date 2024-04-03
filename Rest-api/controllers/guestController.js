@@ -155,7 +155,7 @@ async function handleGuestStatistics(req, res, next) {
   if (req.query.name) {
       findGuestByName(req, res, next);
   } else {
-      getAllCheckedInGuests(req, res, next);
+    getGuestsByRoom(req, res, next);
   }
 }
 
