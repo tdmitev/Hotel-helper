@@ -41,15 +41,12 @@ export class PieChartComponent implements OnInit {
         width: "100%",
         type: "pie",
       },
-      // Останалите настройки на диаграмата...
     };
   
     if (!this.chart) {
-      // Ако диаграмата все още не е създадена
       this.chart = new ApexCharts(document.getElementById("pie-chart"), options);
       this.chart.render();
     } else {
-      // Ако диаграмата вече е създадена, актуализирайте с опциите
       this.chart.updateOptions(options);
     }
   }
