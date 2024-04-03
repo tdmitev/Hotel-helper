@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"37c316e24cd7415db7a9772009064fb1","collectionName":"mealevents","type":"collection"}
