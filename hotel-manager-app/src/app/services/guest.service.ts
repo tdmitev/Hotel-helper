@@ -26,7 +26,7 @@ export class GuestService {
   }
 
   checkOutGuest(guestId: string): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/statistics/checked-in-guests/${guestId}`, {guestId});
+    return this.http.post<void>(`${this.apiUrl}/statistics/checked-in-guests/${guestId}`, { guestId });
   }
 
 }

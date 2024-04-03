@@ -67,16 +67,17 @@ export class AddGuestsComponent implements OnInit {
     });
   }
 
-    checkOutGuest(guestId: string): void {
+  checkOutGuest(guestId: string): void {
     this.guestService.checkOutGuest(guestId).subscribe({
       next: (data) => {
-        console.log('Check-out successful. Data:', data); 
+        console.log('Check-out successful. Data:', data);
         this.messageService.setMessage('Guest checked out successfully!');
         this.loadGuests();
+        this.loadMealEvent(); 
       },
       error: (error) => {
+        console.error('Check-out failed:', error);
         this.messageService.setMessage('Guest already checked out!', "error");
-        console.error('Check-out failed:', error)
       }
     });
   }

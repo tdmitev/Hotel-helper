@@ -65,25 +65,26 @@ async function checkInGuest (req, res, next) {
   }
 
   async function undoCheckInGuest(req, res, next) {
+    const mealEventId = req.session.selectedMealEventId;
     const { guestId } = req.body; 
   
     try {
-      const lastMealEvent = await mealEventModel.findOne().sort({ created_at: -1 });
+      const mealEvent = await mealEventModel.findById(mealEventId);
   
-      if (!lastMealEvent) {
+      if (!mealEvent) {
         return res.status(404).send({ message: "Meal event not found." });
       }
   
-      const guestIndex = lastMealEvent.guests.findIndex(g => g.guestId.equals(guestId) && g.attended);
+      const guestIndex = mealEvent.guests.findIndex(g => g.guestId.equals(guestId) && g.attended);
   
       if (guestIndex === -1) {
         return res.status(404).send({ message: "Guest not found or not checked in." });
       }
 
-      lastMealEvent.guests.splice(guestIndex, 1); 
-      lastMealEvent.attendedGuests = lastMealEvent.guests.filter(g => g.attended).length; 
+      mealEvent.guests.splice(guestIndex, 1); 
+      mealEvent.attendedGuests = mealEvent.guests.filter(g => g.attended).length; 
   
-      await lastMealEvent.save();
+      await mealEvent.save();
   
       res.status(200).send({ message: "Check-in undone successfully." });
     } catch (error) {
