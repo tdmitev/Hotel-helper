@@ -5,6 +5,7 @@ import { MessageService } from 'src/app/services/message.service';
 import { Guest } from 'src/app/types/guest';
 import { MealEvent } from 'src/app/types/meal-event';
 import { MealEventService } from 'src/app/services/meal-event.service';
+import { Statistics } from 'src/app/types/statistics';
 
 @Component({
   selector: 'app-add-guests',
@@ -16,12 +17,14 @@ export class AddGuestsComponent implements OnInit {
   guests: Guest[] = [];
   mealEvent: MealEvent | undefined;
   searchInput: string = '';
+  statistics: Statistics | null = null; 
 
   constructor(private guestService: GuestService, private messageService: MessageService, private mealEventService: MealEventService) { }
 
   ngOnInit(): void {
     this.loadGuests();
     this.loadMealEvent();
+    this.loadGuestStatistics();
   }
 
   loadGuests(): void {
@@ -45,6 +48,17 @@ export class AddGuestsComponent implements OnInit {
     }
   }
 
+  loadGuestStatistics() {
+    this.guestService.getGuestStatistics().subscribe({
+      next: (statistics) => {
+        this.statistics = statistics;
+      },
+      error: (error) => {
+        console.error("Error loading guest statistics", error);
+      }
+    });
+  }
+
 
   checkInGuest(guestId: string): void {
     const mealEventId = sessionStorage.getItem('selectedMealEventId');
@@ -60,6 +74,7 @@ export class AddGuestsComponent implements OnInit {
         this.messageService.setMessage('Guest checked in successfully!');
         this.loadGuests();
         this.loadMealEvent();
+        this.loadGuestStatistics();
       }, 
       error: (error) => {
         this.messageService.setMessage('Guest already checked in!', "error");
@@ -75,6 +90,7 @@ export class AddGuestsComponent implements OnInit {
         this.messageService.setMessage('Guest checked out successfully!');
         this.loadGuests();
         this.loadMealEvent(); 
+        this.loadGuestStatistics();
       },
       error: (error) => {
         console.error('Check-out failed:', error);

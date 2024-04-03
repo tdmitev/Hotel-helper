@@ -1,8 +1,9 @@
 <div @slideFade class="table-wrapper">
     <div class="table-container">
       <div class="div-2">
-        <img src="/assets/images/food.png" alt="Meal Icon">
-        <div class="table-title">Guests list</div>
+        <img src="/assets/images/guests.png" alt="Meal Icon">
+        <div class="table-title">Guests list - </div>
+        <div class="meal-title">{{ mealEvent?.mealType }} | {{ mealEvent?.date | date:'mediumDate' }}</div>
       </div>
 
       <label for="table-search" class="sr-only">Search</label>
@@ -18,7 +19,20 @@
                   placeholder="Search for guests/room number"
                   (input)="onSearchChange($event)" >
       </div>
+
+      <div *ngIf="statistics" class="statistics-container">
+        <div class="checked-in-box">
+          <span class="statistics-value"> {{ statistics.attendedGuests }}</span>
+          <span class="statistics-label">Attended guests</span>
+        </div>
+        <div class="remain-box">
+          <span class="statistics-value">{{ statistics.totalGuests }}</span>
+          <span class="statistics-label">Total guests</span>
+        </div>
+      </div>
       
+
+
       <div class="table-content">
   <div class="relative overflow-x-auto overflow-y-auto shadow-md flex flex-col justify-start flex items-center pt-8">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-7xl mx-auto">

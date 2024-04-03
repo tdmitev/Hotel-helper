@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Guest } from '../types/guest'; 
 import { environment } from 'src/environments/environment';
+import { Statistics } from '../types/statistics';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class GuestService {
 
   checkOutGuest(guestId: string): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/statistics/checked-in-guests/${guestId}`, { guestId });
+  }
+
+  getGuestStatistics(): Observable<Statistics> { 
+    return this.http.get<Statistics>(`${this.apiUrl}/statistics`);
   }
 
 }

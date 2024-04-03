@@ -65,6 +65,13 @@
     font-weight: 700;
     color: #000;
   }
+
+  .meal-title{
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #000;
+  }
   
   .table-container {
     display: flex;
@@ -100,4 +107,44 @@
 
   .bg-light-gray {
     background-color: #f3f3f3; 
+  }
+
+  .statistics-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%; 
+    margin-top: 30px; 
+  }
+  
+  .checked-in-box,
+  .remain-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 50px; 
+  }
+  
+  .checked-in-box {
+    background-color: #F6F6F6;
+    color: #2476F0; 
+  }
+  
+  .remain-box {
+    background-color: #F6F6F6; 
+    color: #FD4B4B; 
+  }
+  
+  .statistics-value {
+    font-size: 2em; 
+    font-weight: bold;
+  }
+  
+  .statistics-label {
+    font-size: 1em; 
   }
