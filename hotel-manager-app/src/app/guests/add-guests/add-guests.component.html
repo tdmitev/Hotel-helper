@@ -72,21 +72,19 @@
                 {{guest.view}}
                </td>
                <td class="px-6 py-4">
-                <div *ngIf="isGuestAttended(guest._id); else notAttended" class="flex items-center">
+                <div *ngIf="guest._id | guestAttended:mealEvent" class="flex items-center">
                   <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Attended
                 </div>
-                <ng-template #notAttended>
-                  <div class="flex items-center">
-                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Not attended
-                  </div>
-                </ng-template>
+                <div *ngIf="!(guest._id | guestAttended:mealEvent)" class="flex items-center">
+                  <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Not attended
+                </div>
               </td>
   
                 <td class="flex items-center px-6 py-4 space-x-3">
                   <button *ngIf="guest._id" (click)="checkInGuest(guest._id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                     Check in
                   </button> 
-                  <button  class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                  <button *ngIf="guest._id" (click)="checkOutGuest(guest._id)" class="font-medium text-red-600 dark:text-red-500 hover:underline">
                     Check out
                   </button>
                 </td>

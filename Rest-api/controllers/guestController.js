@@ -81,7 +81,7 @@ async function checkInGuest (req, res, next) {
       }
 
       lastMealEvent.guests.splice(guestIndex, 1); 
-      lastMealEvent.attendedGuests = lastMealEvent.guests.filter(g => g.attended).length; // Актуализация на броя присъстващи
+      lastMealEvent.attendedGuests = lastMealEvent.guests.filter(g => g.attended).length; 
   
       await lastMealEvent.save();
   
@@ -104,7 +104,7 @@ async function checkInGuest (req, res, next) {
       if (!mealEvent) {
         return res.status(404).send({ message: "Meal event not found." });
       }
-      const checkedInGuests = lastMealEvent.guests.filter(g => g.attended).map(g => g.guestId);
+      const checkedInGuests = mealEvent.guests.filter(g => g.attended).map(g => g.guestId);
       res.status(200).json(checkedInGuests);
     } catch (error) {
       console.error("Error getting checked-in guests:", error);
@@ -139,7 +139,7 @@ async function checkInGuest (req, res, next) {
 async function findGuestByName(req, res, next) {
   const name = req.query.name; 
   try {
-      const guests = await guestsModel.find({ name: { $regex: name, $options: 'i' } }); // Търсене на гости по име (регистър-независимо)
+      const guests = await guestsModel.find({ name: { $regex: name, $options: 'i' } }); 
       if (guests.length === 0) {
           return res.status(404).send({ message: "No guests found with that name." });
       }

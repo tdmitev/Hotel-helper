@@ -17,7 +17,7 @@ import { GuestsModule } from './guests/guests.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

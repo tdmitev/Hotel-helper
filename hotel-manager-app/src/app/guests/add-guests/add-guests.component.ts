@@ -25,7 +25,10 @@ export class AddGuestsComponent implements OnInit {
 
   loadGuests(): void {
     this.guestService.getGuests().subscribe({
-      next: (guests) => this.guests = guests,
+      next: (guests) => {
+        console.log('Guests loaded:', guests); // Това ще покаже списъка с гости, включително всички промени
+        this.guests = guests;
+      },
       error: (error) => console.error('Failed to load guests:', error)
     });
   }
@@ -41,12 +44,6 @@ export class AddGuestsComponent implements OnInit {
     }
   }
 
-  isGuestAttended(guestId: string | undefined): boolean {
-    if (!guestId) {
-      return false;
-    }
-    return this.mealEvent?.guests?.some(g => g.guestId === guestId && g.attended) ?? false;
-  }
 
   checkInGuest(guestId: string): void {
     const mealEventId = sessionStorage.getItem('selectedMealEventId');
@@ -57,12 +54,29 @@ export class AddGuestsComponent implements OnInit {
     }
   
     this.guestService.checkInGuest(guestId, mealEventId).subscribe({
-      next: () => {     
+      next: (data) => {     
+        console.log('Check-in successful. Data:', data); // Проверете данните, връщани от сървъра
         this.messageService.setMessage('Guest checked in successfully!');
+        this.loadGuests();
+        this.loadMealEvent();
       }, 
       error: (error) => {
         this.messageService.setMessage('Guest already checked in!', "error");
         console.error('Check-in failed:', error)
+      }
+    });
+  }
+
+    checkOutGuest(guestId: string): void {
+    this.guestService.checkOutGuest(guestId).subscribe({
+      next: (data) => {
+        console.log('Check-out successful. Data:', data); 
+        this.messageService.setMessage('Guest checked out successfully!');
+        this.loadGuests();
+      },
+      error: (error) => {
+        this.messageService.setMessage('Guest already checked out!', "error");
+        console.error('Check-out failed:', error)
       }
     });
   }
