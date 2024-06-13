@@ -13,6 +13,16 @@ export const fadeOut = trigger('fadeOut', [
   ]),
 ]);
 
+export const fadeInOut = trigger('fadeInOut', [
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate('0.5s', style({ opacity: 1 })),
+  ]),
+  transition(':leave', [
+    animate('0.5s', style({ opacity: 0 }))
+  ]),
+]);
+
 export const slideFade = trigger('slideFade', [
   transition(':enter', [
     style({ transform: 'translateY(-3%)', opacity: 0 }),

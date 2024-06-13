@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { ChatComponent } from './chat/chat.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ChatComponent } from './chat/chat.component';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,

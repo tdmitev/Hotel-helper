@@ -1,15 +1,14 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const cookieSecret = process.env.COOKIESECRET || 'TdMitev';
-const { errorHandler } = require('../utils')
 const session = require('express-session');
 const cors = require('cors');
+const config = require('./config');
 
 module.exports = (app) => {
     app.use(express.json());
 
-    app.use(cookieParser(cookieSecret));
+    app.use(cookieParser());
 
     app.use(session({
         secret: 'odkf0sd9u_90asi09w3w9%$#wiudYG&6w%$#fty', 
@@ -18,15 +17,24 @@ module.exports = (app) => {
         cookie: {
             maxAge: 3600000
         }
-      }));
+    }));
 
-      app.use(cors({
-        origin: 'http://localhost:4200', 
-        credentials: true 
-      }));
-  
+    app.use(cors({
+        origin: ['http://localhost:4200', 'http://127.0.0.1:5000'],
+        credentials: true
+    }));
 
-    app.use(express.static(path.resolve(__basedir, 'static')));
+    // Log every request
+    app.use((req, res, next) => {
+        console.log(`${req.method} ${req.url}`);
+        next();
+    });
 
-    app.use(errorHandler);
+    app.use(express.static(path.resolve(__dirname, 'static')));
+
+    // Error handling middleware
+    app.use((err, req, res, next) => {
+        console.error(err.stack);
+        res.status(500).send('Something broke!');
+    });
 };

@@ -1,0 +1,25 @@
+.settings-menu {
+    padding: 10px;
+  }
+  
+  .settings-menu button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    background: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .settings-menu .rating {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  
+  .settings-menu .rating img {
+    width: 24px;
+    height: 24px;
+  }
